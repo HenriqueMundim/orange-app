@@ -1,1 +1,13 @@
-<p>home works!</p>
+<main>
+    <div class="container" *ngIf="isLogin">
+        <img src="../../../../assets/images/img-login.png" class="login-image" alt="">
+        <div class="form-info">
+            <h3>Entre no Orange Portfólio</h3>
+            <button>Entrar com o Google</button>
+            <form [formGroup]="loginForm">
+                <input type="text" formControlName="name" required>
+            </form>
+        </div>
+    </div>
+
+</main>
