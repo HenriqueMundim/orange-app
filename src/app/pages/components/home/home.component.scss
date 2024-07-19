@@ -15,6 +15,25 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        gap: 32px;
+
+        .google-button {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            background-color: white;
+            padding: 8px;
+            border: 1px solid var(--color-neutral-80);
+
+            cursor: pointer;
+
+            img {
+                width: 30px;
+                height: 24px;
+                object-fit: cover;
+            }
+        }
 
         form {
             width: 100%;
@@ -24,7 +43,8 @@
             gap: 0.75rem;
 
             .form-title {
-                color: var(--color-principal-80);
+                color: var(--color-neutral-100);
+                font-weight: 400;
             }
 
             input, button {
@@ -32,8 +52,25 @@
                 border-radius: 8px;
             }
 
+            input {
+                font-size: 16px;
+                border: 1px solid var(--color-neutral-80);
+            }
+
             button {
+                color: var(--color-neutral-70);
+                text-transform: uppercase;
+                font-size: 15px;
+
                 background-color: var(--color-secondary-100);
+                border: none;
+
+                cursor: pointer;
+            }
+
+            .enroll-link {
+                color: var(--color-neutral-100);
+                text-decoration: none;
             }
         }
     }
