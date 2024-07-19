@@ -5,7 +5,10 @@
             <h3>Entre no Orange Portfólio</h3>
             <button>Entrar com o Google</button>
             <form [formGroup]="loginForm">
-                <input type="text" formControlName="name" required>
+                <h5 class="form-title">Faça login com email</h5>
+                <input type="text" formControlName="name" placeholder="name">
+                <input type="email" formControlName="email" placeholder="Email">
+                <button id="button login">Entrar</button>
             </form>
         </div>
     </div>

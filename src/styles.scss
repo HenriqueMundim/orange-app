@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     list-style: none;
+    font-family: "Roboto", sans-serif;
 }
 
 :root {
@@ -29,4 +30,13 @@ h3 {
 
 h4 {
     font-size: 2.125rem;
+}
+
+
+h5 {
+    font-size: 1.5rem;
+}
+
+h6 {
+    font-size: 1.25rem;
 }
