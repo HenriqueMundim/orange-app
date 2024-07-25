@@ -20,4 +20,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public formhandler() {
+    if (this.isLogin) {
+      
+    }
+  }
+
 }
