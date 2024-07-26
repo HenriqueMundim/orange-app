@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  public isLogin = true;
+  public route: String = "";
   
   public loginForm: FormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.min(1), Validators.max(100), Validators.email]],
@@ -28,16 +28,21 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.route = this.router.url
   }
 
   public formhandler() {
-    if (this.isLogin) {
-      this.login()
+    if (this.route == "/login") {
+
+      if(!this.loginForm.controls["email"].valid) {
+        console.log(this.loginForm.controls["email"].errors);
+        
+      }
     }
   }
 
 
-  private login() {
+  private login(): void {
     this.authService.login({
       username: this.loginForm.controls["email"].value,
       password: this.loginForm.controls["password"].value
@@ -45,14 +50,18 @@ export class HomeComponent implements OnInit {
       next: response => {
         console.log(response) 
         localStorage.setItem("token", response.token)
-      }
+      },
+      error: error => {}
     })      
 
     if (!localStorage.getItem("token")) {
       
     } else {
-      console.log("DEU ERRO");
       
     }
+  }
+
+  public redirectToRegister() {
+    this.router.navigate(['/register']);
   }
 }

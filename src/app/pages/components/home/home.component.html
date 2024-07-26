@@ -1,5 +1,5 @@
 <main>
-    <div class="container" *ngIf="isLogin">
+    <div class="container" *ngIf="route == '/login'">
         <img src="../../../../assets/images/img-login.png" class="login-image" alt="">
         <div class="form-info">
             <h3>Entre no Orange Portfólio</h3>
@@ -12,12 +12,12 @@
                 <input type="email" formControlName="email" placeholder="Email address">
                 <input type="password" formControlName="password" placeholder="Password">
                 <button type="submit" id="button login" (click)="formhandler()">Entrar</button>
-                <a class="enroll-link" href="">Cadastra-se</a>
+                <a class="enroll-link" (click)="redirectToRegister()">Cadastra-se</a>
             </form>
         </div>
     </div>
 
-    <div class="container" *ngIf="!isLogin">
+    <div class="container" *ngIf="route == '/register'">
         <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
     </div>
 </main>
