@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { error, log } from 'console';
-import { Observable } from 'rxjs';
+import { catchError, EMPTY, empty, Observable } from 'rxjs';
 import { IloginResponse } from 'src/app/core/interfaces/Ilogin-response.interface';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 export class HomeComponent implements OnInit {
 
   public route: String = "";
+  public isError: Boolean = false;
   
   public loginForm: FormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.min(1), Validators.max(100), Validators.email]],
@@ -35,8 +36,9 @@ export class HomeComponent implements OnInit {
     if (this.route == "/login") {
 
       if(!this.loginForm.controls["email"].valid) {
-        console.log(this.loginForm.controls["email"].errors);
-        
+        console.log(this.loginForm.controls["email"].errors)
+      } else {
+        this.login()
       }
     }
   }
@@ -46,19 +48,14 @@ export class HomeComponent implements OnInit {
     this.authService.login({
       username: this.loginForm.controls["email"].value,
       password: this.loginForm.controls["password"].value
-    }).subscribe({
-      next: response => {
-        console.log(response) 
+    }).pipe(
+      catchError(error => {
+        return EMPTY;
+    })
+    )
+    .subscribe(response => {
         localStorage.setItem("token", response.token)
-      },
-      error: error => {}
-    })      
-
-    if (!localStorage.getItem("token")) {
-      
-    } else {
-      
-    }
+    })     
   }
 
   public redirectToRegister() {
