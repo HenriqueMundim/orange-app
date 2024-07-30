@@ -1,11 +1,11 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { error, log } from 'console';
-import { catchError, EMPTY, empty, Observable } from 'rxjs';
-import { IloginResponse } from 'src/app/core/interfaces/Ilogin-response.interface';
+import { catchError, EMPTY } from 'rxjs';
+import { AlertTypes } from 'src/app/core/enums/alertType';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +25,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -48,14 +49,21 @@ export class HomeComponent implements OnInit {
     this.authService.login({
       username: this.loginForm.controls["email"].value,
       password: this.loginForm.controls["password"].value
-    }).pipe(
-      catchError(error => {
-        return EMPTY;
     })
+    .pipe(
+      catchError(err => {
+          this.alertService.showAlert("Usuário ou senha incorretos!", AlertTypes.DANGER);
+          return EMPTY;
+      })
     )
-    .subscribe(response => {
-        localStorage.setItem("token", response.token)
-    })     
+    .subscribe({
+      next: (response) => {
+        if(response && response.token) {
+          this.alertService.showAlert("Login efetuado com sucesso!", AlertTypes.SUCCESS);
+          localStorage.setItem("token", response.token);
+        }
+      }
+    })
   }
 
   public redirectToRegister() {
