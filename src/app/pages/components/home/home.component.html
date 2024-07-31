@@ -9,8 +9,33 @@
             </button>
             <form [formGroup]="loginForm">
                 <h5 class="form-title">Faça login com email</h5>
-                <input type="email" formControlName="email" placeholder="Email address">
-                <input type="password" formControlName="password" placeholder="Password">
+                <input type="email" formControlName="email" placeholder="Email address" [ngClass]="{'input-error': loginForm.controls['email'].invalid && loginForm.controls['email'].touched, 'input-valid': loginForm.controls['email'].valid && loginForm.controls['email'].touched}">
+                <small *ngIf="loginForm.controls['email'].getError('required') && loginForm.controls['email'].touched; else invalidEmailError">
+                  *Email é obrigatório!
+                </small>
+
+                <ng-template #invalidEmailError>
+                  <small *ngIf="loginForm.controls['email'].getError('email') && loginForm.controls['email'].touched">
+                    *Email inválido
+                  </small>
+                </ng-template>
+
+                <input type="password" formControlName="password" placeholder="Password" [ngClass]="{'input-error': loginForm.controls['password'].invalid && loginForm.controls['password'].touched, 'input-valid': loginForm.controls['password'].valid && loginForm.controls['password'].touched}">
+                <small *ngIf="loginForm.controls['password'].getError('required') && loginForm.controls['password'].touched; else minPasswordError">
+                  *Senha é obrigatório!
+                </small>
+
+                <ng-template #minPasswordError>
+                  <small *ngIf="loginForm.controls['password'].getError('min') && loginForm.controls['password'].touched; else maxPasswordError">
+                    *Senha deve ter no mínimo 6 caracteres!
+                  </small>
+                </ng-template>
+                <ng-template #maxPasswordError>
+                  <small *ngIf="loginForm.controls['password'].getError('max') && loginForm.controls['password'].touched; else maxPasswordError">
+                    *Senha deve ter no máximo 16 caracteres!
+                  </small>
+                </ng-template>
+
                 <button type="submit" id="button login" (click)="formhandler()">Entrar</button>
                 <a class="enroll-link" (click)="redirectToRegister()">Cadastra-se</a>
             </form>
