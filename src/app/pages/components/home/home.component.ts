@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
     password: ['',
       [
         Validators.required,
-        Validators.min(6),
-        Validators.max(16)
+        Validators.minLength(6),
+        Validators.maxLength(16)
       ]
     ]
   })

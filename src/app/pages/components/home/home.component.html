@@ -26,12 +26,12 @@
                 </small>
 
                 <ng-template #minPasswordError>
-                  <small *ngIf="loginForm.controls['password'].getError('min') && loginForm.controls['password'].touched; else maxPasswordError">
+                  <small *ngIf="loginForm.controls['password'].getError('minlength') && loginForm.controls['password'].touched; else maxPasswordError">
                     *Senha deve ter no mínimo 6 caracteres!
                   </small>
                 </ng-template>
                 <ng-template #maxPasswordError>
-                  <small *ngIf="loginForm.controls['password'].getError('max') && loginForm.controls['password'].touched">
+                  <small *ngIf="loginForm.controls['password'].getError('maxlength') && loginForm.controls['password'].touched">
                     *Senha deve ter no máximo 16 caracteres!
                   </small>
                 </ng-template>
