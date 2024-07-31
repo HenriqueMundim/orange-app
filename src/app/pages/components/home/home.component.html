@@ -22,7 +22,7 @@
 
                 <input type="password" formControlName="password" placeholder="Password" [ngClass]="{'input-error': loginForm.controls['password'].invalid && loginForm.controls['password'].touched, 'input-valid': loginForm.controls['password'].valid && loginForm.controls['password'].touched}">
                 <small *ngIf="loginForm.controls['password'].getError('required') && loginForm.controls['password'].touched; else minPasswordError">
-                  *Senha é obrigatório!
+                  *Senha é obrigatória!
                 </small>
 
                 <ng-template #minPasswordError>
@@ -31,7 +31,7 @@
                   </small>
                 </ng-template>
                 <ng-template #maxPasswordError>
-                  <small *ngIf="loginForm.controls['password'].getError('max') && loginForm.controls['password'].touched; else maxPasswordError">
+                  <small *ngIf="loginForm.controls['password'].getError('max') && loginForm.controls['password'].touched">
                     *Senha deve ter no máximo 16 caracteres!
                   </small>
                 </ng-template>
