@@ -1,5 +1,4 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, EMPTY } from 'rxjs';

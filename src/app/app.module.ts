@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { environment } from 'src/environments/environment.dev';
 
 @NgModule({
@@ -21,8 +21,7 @@ import { environment } from 'src/environments/environment.dev';
     HttpClientModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
-    SharedModule,
-    SocialLoginModule
+    SharedModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
@@ -31,10 +30,10 @@ import { environment } from 'src/environments/environment.dev';
       providers: [
         {
           id: GoogleLoginProvider.PROVIDER_ID,
-          provide: new GoogleLoginProvider(environment.googleClientId)
+          provider: new GoogleLoginProvider(environment.googleClientId)
         }
       ]
-    }
+    } as SocialAuthServiceConfig
   }],
   bootstrap: [AppComponent]
 })
