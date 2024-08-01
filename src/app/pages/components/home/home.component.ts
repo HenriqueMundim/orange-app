@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, EMPTY } from 'rxjs';
@@ -14,6 +14,8 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 export class HomeComponent implements OnInit {
 
   public route: String = "";
+  public emailErrorMessage = " ";
+  public passwordErrorMessage = " ";
 
   public loginForm: FormGroup = this.formBuilder.group({
     email: ['',
@@ -35,11 +37,33 @@ export class HomeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) { }
 
   ngOnInit(): void {
     this.route = this.router.url
+
+    this.loginForm.get('email')?.valueChanges.subscribe((value) => {
+      if(this.loginForm.controls['email'].getError('required')) {
+        this.emailErrorMessage = "*Email é obrigatório!"
+      } else if(this.loginForm.controls['email'].getError('email')) {
+        this.emailErrorMessage = "*Email inválido"
+      }
+    })
+
+    this.loginForm.get('password')?.valueChanges.subscribe((value) => {
+      if(this.loginForm.controls['password'].getError('required')) {
+        this.passwordErrorMessage = "*Senha é obrigatória!"
+      } else if(this.loginForm.controls['password'].getError('minlength')) {
+        this.passwordErrorMessage = "*A senha deve ter no mínimo 6 caracteres"
+      } else if(this.loginForm.controls['password'].getError('maxlength')) {
+        this.passwordErrorMessage = "*A senha deve ter no máximo 6 caracteres"
+      }
+    })
+  }
+
+  public setErroMessage() {
+
   }
 
   public formhandler() {
