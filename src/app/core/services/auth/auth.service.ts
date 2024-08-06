@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Login } from '../../interfaces/login.interface';
 import { environment } from 'src/environments/environment.dev';
 import { IloginResponse } from '../../interfaces/Ilogin-response.interface';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,6 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
   ) { }
 
   public login(data: Login): Observable<IloginResponse> {

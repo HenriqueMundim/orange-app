@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Login } from './../../../core/interfaces/login.interface';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, EMPTY } from 'rxjs';
@@ -8,12 +9,11 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
-  public route: String = "";
   public emailErrorMessage = " ";
   public passwordErrorMessage = " ";
 
@@ -41,7 +41,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route = this.router.url
 
     this.loginForm.get('email')?.valueChanges.subscribe((value) => {
       if(this.loginForm.controls['email'].getError('required')) {
@@ -62,38 +61,27 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  public setErroMessage() {
-
-  }
-
-  public formhandler() {
-    if (this.route == "/login") {
-      if(this.loginForm.valid) {
-        this.login();
-      }
-    }
-  }
-
-
-  private login(): void {
-    this.authService.login({
-      username: this.loginForm.controls["email"].value,
-      password: this.loginForm.controls["password"].value
-    })
-    .pipe(
-      catchError(err => {
-          this.alertService.showAlert("Usuário ou senha incorretos!", AlertTypes.DANGER);
-          return EMPTY;
+  public login(): void {
+    if (this.loginForm.valid) {
+      this.authService.login({
+        username: this.loginForm.controls["email"].value,
+        password: this.loginForm.controls["password"].value
       })
-    )
-    .subscribe({
-      next: (response) => {
-        if(response && response.token) {
-          this.alertService.showAlert("Login efetuado com sucesso!", AlertTypes.SUCCESS);
-          localStorage.setItem("token", response.token);
+      .pipe(
+        catchError(err => {
+            this.alertService.showAlert("Usuário ou senha incorretos!", AlertTypes.DANGER);
+            return EMPTY;
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          if(response && response.token) {
+            this.alertService.showAlert("Login efetuado com sucesso!", AlertTypes.SUCCESS);
+            localStorage.setItem("token", response.token);
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   public redirectToRegister() {

@@ -1,5 +1,5 @@
 <main>
-    <div class="container-home" *ngIf="route == '/login'">
+    <div class="container-home">
         <img src="../../../../assets/images/img-login.png" class="login-image" alt="">
         <div class="form-info">
             <h3>Entre no Orange Portfólio</h3>
@@ -22,13 +22,9 @@
                   </small>
                 </div>
 
-                <button type="submit" id="button login" (click)="formhandler()">Entrar</button>
+                <button type="submit" id="button login" (click)="login()">Entrar</button>
                 <a class="enroll-link" (click)="redirectToRegister()">Cadastra-se</a>
             </form>
         </div>
-    </div>
-
-    <div class="container" *ngIf="route == '/register'">
-        <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
     </div>
 </main>
