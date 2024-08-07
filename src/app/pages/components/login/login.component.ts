@@ -1,4 +1,3 @@
-import { Login } from './../../../core/interfaces/login.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,6 +5,7 @@ import { catchError, EMPTY } from 'rxjs';
 import { AlertTypes } from 'src/app/core/enums/alertType';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
+import { environment } from 'src/environments/environment.dev';
 
 @Component({
   selector: 'app-home',
@@ -82,6 +82,10 @@ export class LoginComponent implements OnInit {
         }
       })
     }
+  }
+
+  public loginGoogle() {
+    window.location.href = environment.url + "/oauth2/authorization/google"
   }
 
   public redirectToRegister() {
