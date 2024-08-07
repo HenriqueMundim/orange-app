@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ModalModule.forRoot(),
     SharedModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    CookieService
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
