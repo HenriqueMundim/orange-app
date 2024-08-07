@@ -1,0 +1,38 @@
+.alert {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        padding: 8px;
+        margin: 0;
+        border-radius: 0;
+        gap: 8px;
+
+        span {
+            color: var(--color-principal-70);
+        }
+}
+
+.success {
+    background-color: var(--color-success-110);
+
+    div {
+        background-image: url(../../../assets/images/success-icon.png);
+        width: 24px;
+        height: 24px;
+        background-size: contain;
+    }
+
+}
+
+.error {
+    background-color: var(--color-error-110);
+
+    div {
+        background-image: url(../../../assets/images/error-icon.png);
+        width: 24px;
+        height: 24px;
+        background-size: contain;
+    }
+
+}

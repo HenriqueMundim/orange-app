@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    --color-principal-70: #EDEFF2;
+    --color-principal-80: #444466;
+    --color-principal-90: #222244;
+    --color-principal-100: #111133;
+
+    --color-secondary-100: #FF5522;
+
+    --color-neutral-70: #E6E9F2;
+    --color-neutral-80: #C2C4CC;
+    --color-neutral-100: #818388;
+    --color-neutral-110: #515255;
+    --color-neutral-120: #303133;
+    --color-neutral-130: #0B0C0D;
+
+    --color-success-110: #118822;
+
+    --color-error-110: #DD0000;
+    --color-error-100: #DD0000;
+}
+
+h1 {
+    font-size: 6rem;
+}
+
+h2 {
+    font-size: 3.75rem;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+h4 {
+    font-size: 2.125rem;
+}
+
+
+h5 {
+    font-size: 1.5rem;
+}
+
+h6 {
+    font-size: 1.25rem;
+}
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";

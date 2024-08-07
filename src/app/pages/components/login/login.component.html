@@ -1,0 +1,30 @@
+<main>
+    <div class="container-home">
+        <img src="../../../../assets/images/img-login.png" class="login-image" alt="">
+        <div class="form-info">
+            <h3>Entre no Orange Portfólio</h3>
+            <button class="google-button" (click)="loginGoogle()">
+                <img src="./../../../../assets/images/google-icon.png" alt="google icon">
+                Entrar com o Google
+            </button>
+            <form [formGroup]="loginForm">
+                <h5 class="form-title">Faça login com email</h5>
+                <div class="input-wrapper">
+                  <input type="email" formControlName="email" placeholder="Email address" [ngClass]="{'input-error': loginForm.controls['email'].invalid && loginForm.controls['email'].touched, 'input-valid': loginForm.controls['email'].valid && loginForm.controls['email'].touched}">
+                  <small *ngIf="loginForm.controls['email'].invalid">
+                    {{emailErrorMessage}}
+                  </small>
+                </div>
+                <div class="input-wrapper">
+                  <input type="password" formControlName="password" placeholder="Password" [ngClass]="{'input-error': loginForm.controls['password'].invalid && loginForm.controls['password'].touched, 'input-valid': loginForm.controls['password'].valid && loginForm.controls['password'].touched}">
+                  <small *ngIf="loginForm.controls['password'].invalid">
+                    {{passwordErrorMessage}}
+                  </small>
+                </div>
+
+                <button type="submit" id="button login" (click)="login()">Entrar</button>
+                <a class="enroll-link" (click)="redirectToRegister()">Cadastra-se</a>
+            </form>
+        </div>
+    </div>
+</main>
