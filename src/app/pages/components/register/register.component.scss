@@ -24,9 +24,14 @@
     flex-direction: column;
 
     max-width: 517px;
+    width: 100%;
 
     .input-wrapper {
       min-height: 82px;
+
+      .teste {
+        width: 100%;
+      }
     }
 
     input, button {
@@ -45,6 +50,17 @@
     .flex-input {
       display: flex;
       gap: 5px;
+
+      .input-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+    }
+
+    .invalid-input {
+      border-color: var(--color-error-110);
     }
 
     #button-register {
