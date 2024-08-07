@@ -1,0 +1,30 @@
+<main>
+  <div class="container-register">
+      <img src="../../../../assets/images/img-cadastro.png" class="register-image" alt="">
+      <div class="form-info">
+          <h3>Cadastre-se</h3>
+          <form [formGroup]="registerForm">
+              <div class="input-wrapper flex-input">
+                <input type="text" formControlName="firstName" placeholder="First Name">
+                <!-- <small *ngIf="loginForm.controls['email'].invalid">
+                  {{emailErrorMessage}}
+                </small> -->
+                <input type="text" formControlName="lastName" placeholder="Last Name">
+                <!-- <small *ngIf="loginForm.controls['password'].invalid">
+                  {{passwordErrorMessage}}
+                </small> -->
+              </div>
+
+              <div class="input-wrapper">
+                <input type="email" formControlName="email" placeholder="Email address">
+              </div>
+
+              <div class="input-wrapper">
+                <input type="password" formControlName="password" placeholder="Password">
+              </div>
+
+              <button type="submit" id="button register">Cadastrar</button>
+          </form>
+      </div>
+  </div>
+</main>
