@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,20 +8,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  public registerForm = this.formBulder.group([
-    {
-      firstName: ['', Validators.required]
-    },
-    {
-      lastName: ['', Validators.required]
-    },
-    {
+  public registerForm: FormGroup = this.formBulder.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       email: ['', [
         Validators.required,
         Validators.email
-      ]]
-    },
-    {
+      ]],
       password: ['',
         [
           Validators.required,
@@ -30,11 +23,15 @@ export class RegisterComponent implements OnInit {
         ]
       ]
     }
-  ])
+  )
 
   constructor(private formBulder: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
+
+  public formHandler(): void {
+    if(this.registerForm.valid) {}
+  }
 }
