@@ -1,6 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { error } from 'console';
 import { catchError, EMPTY } from 'rxjs';
 import { AlertTypes } from 'src/app/core/enums/alertType';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -14,8 +16,8 @@ import { environment } from 'src/environments/environment.dev';
 })
 export class LoginComponent implements OnInit {
 
-  public emailErrorMessage = " ";
-  public passwordErrorMessage = " ";
+  public emailErrorMessage = "";
+  public passwordErrorMessage = "";
 
   public loginForm: FormGroup = this.formBuilder.group({
     email: ['',
@@ -85,7 +87,7 @@ export class LoginComponent implements OnInit {
   }
 
   public loginGoogle() {
-    window.location.href = environment.url + "/oauth2/authorization/google"
+    window.location.href = `${environment.url}/oauth2/authorization/google`
   }
 
   public redirectToRegister() {

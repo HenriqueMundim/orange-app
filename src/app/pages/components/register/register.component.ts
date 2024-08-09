@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { catchError, EMPTY } from 'rxjs';
+import { AlertService } from 'src/app/shared/services/alert.service';
+import { AlertTypes } from 'src/app/core/enums/alertType';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -38,7 +43,12 @@ export class RegisterComponent implements OnInit {
     }
   )
 
-  constructor(private formBulder: FormBuilder) { }
+  constructor(
+    private formBulder: FormBuilder,
+    private userService: UserService,
+    private alertService: AlertService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
 
@@ -86,8 +96,32 @@ export class RegisterComponent implements OnInit {
 
   public formHandler(): void {
     if(this.registerForm.valid) {
-
+      this.register();
     }
+  }
+
+  private register(): void {
+    this.userService.create({
+      name: this.registerForm.controls["firstName"].value,
+      lastName: this.registerForm.controls["lastName"].value,
+      email: this.registerForm.controls["email"].value,
+      password: this.registerForm.controls["password"].value
+    }).pipe(
+      catchError((error) => {
+        this.alertService.showAlert("Não foi possível fazer o cadastro, tente novamente", AlertTypes.DANGER);
+        return EMPTY;
+      })
+    ).subscribe({
+      next: response => {
+        this.alertService.showAlert("Cadastro efetuado com sucesso!", AlertTypes.SUCCESS);
+        console.log(response)
+        setTimeout(() => this.redirectToLogin(), 3000)
+      }
+    })
+  }
+
+  private redirectToLogin() {
+    this.router.navigate(["/login"])
   }
 
 }
