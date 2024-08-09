@@ -13,7 +13,7 @@
                   <input
                     type="email" formControlName="email"
                     placeholder="Email address"
-                    [ngClass]="{'input-error': loginForm.controls['email'].invalid && loginForm.controls['email'].touched, 'input-valid': loginForm.controls['email'].valid && loginForm.controls['email'].touched}"
+                    [ngClass]="loginForm.controls['email'].invalid && loginForm.controls['email'].dirty ? 'invalid-input' : 'valid-input'"
                   >
                   <small *ngIf="loginForm.controls['email'].invalid">
                     {{emailErrorMessage}}
@@ -24,7 +24,7 @@
                     type="password"
                     formControlName="password"
                     placeholder="Password"
-                    [ngClass]="{'input-error': loginForm.controls['password'].invalid && loginForm.controls['password'].touched, 'input-valid': loginForm.controls['password'].valid && loginForm.controls['password'].touched}"
+                    [ngClass]="loginForm.controls['password'].invalid && loginForm.controls['password'].dirty ? 'invalid-input' : 'valid-input'"
                   >
                   <small *ngIf="loginForm.controls['password'].invalid">
                     {{passwordErrorMessage}}

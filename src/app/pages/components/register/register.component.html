@@ -6,13 +6,22 @@
           <form [formGroup]="registerForm">
               <div class="flex-input">
                 <div class="input-wrapper">
-                  <input type="text" formControlName="firstName" placeholder="First Name *" [ngClass]="registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].dirty ? 'invalid-input' : 'valid-input'">
+                  <input
+                    type="text"
+                    formControlName="firstName" placeholder="First Name *"
+                    [ngClass]="registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].dirty ? 'invalid-input' : 'valid-input'"
+                  >
                   <small *ngIf="registerForm.controls['firstName'].invalid">
                     {{firstNameErrorMessage}}
                   </small>
                 </div>
                 <div class="input-wrapper">
-                  <input type="text" formControlName="lastName" placeholder="Last Name *" [ngClass]="registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].dirty ? 'invalid-input' : 'valid-input'">
+                  <input
+                    type="text"
+                    formControlName="lastName"
+                    placeholder="Last Name *"
+                    [ngClass]="registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].dirty ? 'invalid-input' : 'valid-input'"
+                  >
                   <small *ngIf="registerForm.controls['lastName'].invalid">
                     {{lastNameErrorMessage}}
                   </small>
@@ -20,14 +29,24 @@
               </div>
 
               <div class="input-wrapper">
-                <input type="email" formControlName="email" placeholder="Email address *" [ngClass]="registerForm.controls['email'].invalid && registerForm.controls['email'].dirty ? 'invalid-input' : 'valid-input'">
+                <input
+                  type="email"
+                  formControlName="email"
+                  placeholder="Email address *"
+                  [ngClass]="registerForm.controls['email'].invalid && registerForm.controls['email'].dirty ? 'invalid-input' : 'valid-input'"
+                >
                 <small *ngIf="registerForm.controls['email'].invalid">
                   {{emailErrorMessage}}
               </small>
               </div>
 
               <div class="input-wrapper">
-                <input type="password" formControlName="password" placeholder="Password *" [ngClass]="registerForm.controls['password'].invalid && registerForm.controls['password'].dirty ? 'invalid-input' : 'valid-input'">
+                <input
+                  type="password"
+                  formControlName="password"
+                  placeholder="Password *"
+                  [ngClass]="registerForm.controls['password'].invalid && registerForm.controls['password'].dirty ? 'invalid-input' : 'valid-input'"
+                >
                 <small *ngIf="registerForm.controls['password'].invalid">
                     {{passwordErrorMessage}}
                 </small>

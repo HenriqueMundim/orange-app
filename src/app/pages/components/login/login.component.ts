@@ -46,19 +46,19 @@ export class LoginComponent implements OnInit {
 
     this.loginForm.get('email')?.valueChanges.subscribe((value) => {
       if(this.loginForm.controls['email'].getError('required')) {
-        this.emailErrorMessage = "*Email é obrigatório!"
+        this.emailErrorMessage = "Email é obrigatório! *"
       } else if(this.loginForm.controls['email'].getError('email')) {
-        this.emailErrorMessage = "*Email inválido"
+        this.emailErrorMessage = "Email inválido *"
       }
     })
 
     this.loginForm.get('password')?.valueChanges.subscribe((value) => {
       if(this.loginForm.controls['password'].getError('required')) {
-        this.passwordErrorMessage = "*Senha é obrigatória!"
+        this.passwordErrorMessage = "Senha é obrigatória! *"
       } else if(this.loginForm.controls['password'].getError('minlength')) {
-        this.passwordErrorMessage = "*A senha deve ter no mínimo 6 caracteres"
+        this.passwordErrorMessage = "A senha deve ter no mínimo 6 caracteres *"
       } else if(this.loginForm.controls['password'].getError('maxlength')) {
-        this.passwordErrorMessage = "*A senha deve ter no máximo 6 caracteres"
+        this.passwordErrorMessage = "A senha deve ter no máximo 6 caracteres *"
       }
     })
   }
