@@ -2,7 +2,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    
+
         padding: 8px;
         margin: 0;
         border-radius: 0;
@@ -17,7 +17,7 @@
     background-color: var(--color-success-110);
 
     div {
-        background-image: url(../../../assets/images/success-icon.png);
+        background-image: url(../../../assets/icons/success-icon.png);
         width: 24px;
         height: 24px;
         background-size: contain;
@@ -29,7 +29,7 @@
     background-color: var(--color-error-110);
 
     div {
-        background-image: url(../../../assets/images/error-icon.png);
+        background-image: url(../../../assets/icons/error-icon.png);
         width: 24px;
         height: 24px;
         background-size: contain;
