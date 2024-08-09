@@ -18,6 +18,8 @@ export class RegisterComponent implements OnInit {
   public emailErrorMessage = "";
   public passwordErrorMessage = "";
 
+  public windowSize = window.innerWidth;
+
   public registerForm: FormGroup = this.formBulder.group({
       firstName: ['', [
         Validators.required,

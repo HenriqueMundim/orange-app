@@ -10,13 +10,22 @@
             <form [formGroup]="loginForm">
                 <h5 class="form-title">Faça login com email</h5>
                 <div class="input-wrapper">
-                  <input type="email" formControlName="email" placeholder="Email address" [ngClass]="{'input-error': loginForm.controls['email'].invalid && loginForm.controls['email'].touched, 'input-valid': loginForm.controls['email'].valid && loginForm.controls['email'].touched}">
+                  <input
+                    type="email" formControlName="email"
+                    placeholder="Email address"
+                    [ngClass]="{'input-error': loginForm.controls['email'].invalid && loginForm.controls['email'].touched, 'input-valid': loginForm.controls['email'].valid && loginForm.controls['email'].touched}"
+                  >
                   <small *ngIf="loginForm.controls['email'].invalid">
                     {{emailErrorMessage}}
                   </small>
                 </div>
                 <div class="input-wrapper">
-                  <input type="password" formControlName="password" placeholder="Password" [ngClass]="{'input-error': loginForm.controls['password'].invalid && loginForm.controls['password'].touched, 'input-valid': loginForm.controls['password'].valid && loginForm.controls['password'].touched}">
+                  <input
+                    type="password"
+                    formControlName="password"
+                    placeholder="Password"
+                    [ngClass]="{'input-error': loginForm.controls['password'].invalid && loginForm.controls['password'].touched, 'input-valid': loginForm.controls['password'].valid && loginForm.controls['password'].touched}"
+                  >
                   <small *ngIf="loginForm.controls['password'].invalid">
                     {{passwordErrorMessage}}
                   </small>

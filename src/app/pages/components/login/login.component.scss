@@ -93,3 +93,67 @@
         }
     }
 }
+
+
+@media(max-width: 1023px) {
+  .container-home {
+
+    display: flex;
+    align-items: center;
+
+    height: 100vh;
+
+    .login-image {
+      display: none;
+    }
+
+    .form-info {
+      width: 100%;
+      padding: 16px;
+
+
+      form {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+    }
+
+    }
+  }
+
+}
+
+@media(max-width: 767px) {
+  .container-home {
+
+    .form-info {
+      width: 100%;
+      padding: 16px;
+
+      h3 {
+        font-size: 32px !important;
+      }
+
+    }
+  }
+
+}
+
+@media(max-width: 400px) {
+  .container-home {
+
+    .form-info {
+      width: 100%;
+      padding: 16px;
+
+      h3 {
+        font-size: 24px !important;
+      }
+
+    }
+  }
+
+}
