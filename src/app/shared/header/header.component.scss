@@ -1,0 +1,35 @@
+header {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 16px 30px 16px 30px;
+  background-color: var(--color-principal-100);
+
+  .menu-container {
+    display: flex;
+    align-items: center;
+
+    nav ul {
+      display: flex;
+      gap: 24px;
+
+      margin: 0;
+
+      li {
+        display: inline-block;
+
+        font-size: 20px;
+        color: var(--color-neutral-60);
+      }
+    }
+  }
+
+  .container-profile {
+    display: flex;
+    gap: 16px;
+
+    .profile-image {
+      border-radius: 300px;
+    }
+  }
+}
