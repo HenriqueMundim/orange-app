@@ -1,7 +1,30 @@
 <header>
   <div class="menu-container">
+    <div class="menu-hamburguer-container" *ngIf="viewSize <= 768">
+      <div class="menu-hamburguer-image" (click)="dropdown()">
+        <img src="../../../assets/icons/hamburguer-menu-icon.svg" alt="menu hamburguer icon" style="width: 24px;" #openMenu>
+      </div>
+      <div class="menu-dropdown-container" #dropdownMenu>
+        <nav class="menu-dropdown">
+          <ul class="menu-dropdown-list">
+            <li>
+              <p>Henrique</p>
+              <p class="light-color">henrique@email.com</p>
+            </li>
+            <hr>
+            <li><p>Meus Projetos</p></li>
+            <li><p>Descobrir</p></li>
+            <hr>
+            <li>
+              <img class="logout-icon" src="../../../assets/icons/logout-icon.svg" alt="Logout icon">
+              <span>Sair</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
     <img src="../../../assets/images/header-logo.svg" alt="orange portfolio logo">
-    <nav>
+    <nav *ngIf="viewSize > 768">
       <ul>
         <li>Meus projetos</li>
         <li>Descobrir</li>
@@ -13,3 +36,6 @@
     <img src="../../../assets/icons/Icon-notifications.svg" alt="notifications icon">
   </div>
 </header>
+
+
+
