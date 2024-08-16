@@ -1,15 +1,15 @@
 <header>
   <div class="menu-container">
-    <div class="menu-hamburguer-container" *ngIf="viewSize <= 768">
-      <div class="menu-hamburguer-image" (click)="dropdown()">
+    <div class="menu-hamburguer-container">
+      <div class="menu-hamburguer-image" (click)="dropdown()" *ngIf="viewSize <= 768">
         <img src="../../../assets/icons/hamburguer-menu-icon.svg" alt="menu hamburguer icon" #openMenu>
       </div>
-      <div class="menu-dropdown-container" #dropdownMenu>
+      <div [ngClass]="viewSize <= 768 ? 'menu-dropdown-container' : 'menu-dropdown-container-desktop'" #dropdownMenu>
         <nav class="menu-dropdown">
           <ul class="menu-dropdown-list">
             <li>
-              <p>Henrique</p>
-              <p class="light-color">henrique@email.com</p>
+              <p>{{name}}</p>
+              <p class="light-color">{{email}}</p>
             </li>
             <hr>
             <li><p>Meus Projetos</p></li>
@@ -32,7 +32,7 @@
     </nav>
   </div>
   <div class="container-profile">
-    <img class="profile-image" src="../../../assets/images/profile-image.svg" alt="profile image">
+    <img class="profile-image" src="../../../assets/images/profile-image.svg" alt="profile image" (click)="dropdown()" #openMenu>
     <img src="../../../assets/icons/Icon-notifications.svg" alt="notifications icon">
   </div>
 </header>

@@ -32,11 +32,8 @@ header {
     }
   }
 
-  .menu-dropdown-container {
-    display: none;
-    position: fixed;
-    top: 73px;
-    left: 0;
+  .menu-dropdown-container, .menu-dropdown-container-desktop {
+
     width: 100%;
     max-width: 220px;
 
@@ -79,7 +76,21 @@ header {
       }
     }
 
-    }
+  }
+
+  .menu-dropdown-container {
+    display: none;
+    position: fixed;
+    top: 73px;
+    left: 0;
+  }
+
+  .menu-dropdown-container-desktop {
+    display: none;
+    position: fixed;
+    top: 73px;
+    right: 0;
+  }
 
   .container-profile {
     display: flex;

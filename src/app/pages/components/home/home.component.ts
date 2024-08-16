@@ -2,6 +2,7 @@ import { catchError, EMPTY } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +12,21 @@ import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
 export class HomeComponent implements OnInit {
 
   private token: string | null = "";
-  public userInfo: IuserInfo | undefined;
+  public userInfo: IuserInfo = {
+    id: 0,
+    name: "",
+    lastName: "",
+    email: ""
+  };
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem("token") != null) {
+    if(localStorage.getItem("token") !== null) {
       this.token = localStorage.getItem("token");
     }
-
     this.getUserInfo()
   }
 

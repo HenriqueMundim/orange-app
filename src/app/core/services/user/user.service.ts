@@ -18,7 +18,7 @@ export class UserService {
 
   public getInfo(token: any): Observable<IuserInfo> {
     const headers = new HttpHeaders({
-      'Authorization': token
+      'Authorization': `Bearer ${token}`
     })
     return this.http.get<IuserInfo>(`${environment.url}/users`, {
       headers
