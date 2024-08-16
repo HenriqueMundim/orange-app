@@ -24,10 +24,10 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem("token") !== null) {
+    if(localStorage.getItem("token") != null) {
       this.token = localStorage.getItem("token");
+      this.getUserInfo()
     }
-    this.getUserInfo()
   }
 
 

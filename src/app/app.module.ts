@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -22,7 +21,6 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
-    BsDropdownModule.forRoot(),
     SharedModule
   ],
   providers: [

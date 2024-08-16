@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.viewSize = window.innerWidth;
 
-    if(this.cookieService.get("token") != null) {
+    if(this.cookieService.get("token") !== null && localStorage.getItem("token") === null) {
       this.getGoogleUserInfo(this.cookieService.get("token"));
     }
   }
