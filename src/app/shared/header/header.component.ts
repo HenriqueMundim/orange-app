@@ -61,6 +61,7 @@ export class HeaderComponent implements OnInit {
   private getGoogleUserInfo(token: String) {
     this.userService.getInfo(token).pipe(
       catchError(err => {
+          this.router.navigate(["/login"])
           return EMPTY;
       })
     )
@@ -72,4 +73,10 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  public logout() {
+    this.cookieService.deleteAll();
+    localStorage.clear();
+
+    this.router.navigate(["/login"]);
+  }
 }
