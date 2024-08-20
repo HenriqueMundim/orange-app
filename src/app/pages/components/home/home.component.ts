@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +21,15 @@ export class HomeComponent implements OnInit {
     email: ""
   };
 
+  public searchFilter: FormGroup = this.formBuilder.group({
+    tag: ['']
+  })
+
   constructor(
     private userService: UserService,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
