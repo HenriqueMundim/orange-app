@@ -1,1 +1,12 @@
 <app-header [name]="userInfo.name + ' ' + userInfo.lastName" [email]="userInfo.email"></app-header>
+<main>
+  <section class="profile">
+    <div class="profile-card">
+      <img src="../../../../assets/images/profile-image.svg" alt="profile image">
+      <div>
+        <p>{{userInfo.name + ' ' + userInfo.lastName}}</p>
+        <button>Adicionar projeto</button>
+      </div>
+    </div>
+  </section>
+</main>

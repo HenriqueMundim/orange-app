@@ -36,10 +36,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.viewSize = window.innerWidth;
     this.path = this.router.url;
-
-    if(this.cookieService.get("token") !== null && localStorage.getItem("token") === null) {
-      this.getGoogleUserInfo(this.cookieService.get("token"));
-    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -50,8 +46,6 @@ export class HeaderComponent implements OnInit {
   }
 
   private closeMenu(event: Event) {
-    console.log("OK");
-
     if (this.isMenuOpen === true && event.target != this.openMenu?.nativeElement && event.target != this.dropdownMenu?.nativeElement) {
       console.log("close");
       this.dropdownMenu!.nativeElement.style.display="none";
@@ -63,20 +57,6 @@ export class HeaderComponent implements OnInit {
     this.isMenuOpen = true;
   }
 
-  private getGoogleUserInfo(token: String) {
-    this.userService.getInfo(token).pipe(
-      catchError(err => {
-          this.router.navigate(["/login"])
-          return EMPTY;
-      })
-    )
-    .subscribe({
-      next: (respose: IuserInfo) => {
-        this.name = respose.name + " " + respose.lastName;
-        this.email = respose.email;
-      }
-    })
-  }
 
   public logout() {
     this.cookieService.deleteAll();

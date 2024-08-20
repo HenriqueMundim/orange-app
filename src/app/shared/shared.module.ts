@@ -4,8 +4,6 @@ import { AlertComponent } from './alert/alert.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 
-
-
 @NgModule({
   declarations: [
     AlertComponent,
