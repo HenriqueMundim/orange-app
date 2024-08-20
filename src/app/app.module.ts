@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { CookieService } from 'ngx-cookie-service';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
-    SharedModule
+    SharedModule,
+    PagesModule
   ],
   providers: [
     CookieService

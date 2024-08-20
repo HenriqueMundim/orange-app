@@ -2,7 +2,6 @@ import { catchError, EMPTY } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',

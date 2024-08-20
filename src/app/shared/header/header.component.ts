@@ -1,6 +1,6 @@
 import { IuserInfo } from './../../core/interfaces/IuserInfo.interface';
 import { CookieService } from 'ngx-cookie-service';
-import { Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { catchError, EMPTY } from 'rxjs';
 import { Router } from '@angular/router';
@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   private clickListener: () => void;
   private isMenuOpen = false;
   public viewSize: number = 0;
+  public path: string = "";
 
   constructor(
     private userService: UserService,
@@ -34,6 +35,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.viewSize = window.innerWidth;
+    this.path = this.router.url;
 
     if(this.cookieService.get("token") !== null && localStorage.getItem("token") === null) {
       this.getGoogleUserInfo(this.cookieService.get("token"));
@@ -48,7 +50,10 @@ export class HeaderComponent implements OnInit {
   }
 
   private closeMenu(event: Event) {
-    if (this.isMenuOpen === true && event.target != this.openMenu?.nativeElement) {
+    console.log("OK");
+
+    if (this.isMenuOpen === true && event.target != this.openMenu?.nativeElement && event.target != this.dropdownMenu?.nativeElement) {
+      console.log("close");
       this.dropdownMenu!.nativeElement.style.display="none";
     }
   }
