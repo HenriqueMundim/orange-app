@@ -4,12 +4,14 @@ import { AlertComponent } from './alert/alert.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { ProjectCardComponent } from './project-card/project-card.component';
+import { ModalRegisterProjectComponent } from './modal-register-project/modal-register-project.component';
 
 @NgModule({
   declarations: [
     AlertComponent,
     HeaderComponent,
-    ProjectCardComponent
+    ProjectCardComponent,
+    ModalRegisterProjectComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { ProjectCardComponent } from './project-card/project-card.component';
   exports: [
     HeaderComponent,
     ProjectCardComponent,
+    ModalRegisterProjectComponent,
     RouterModule
   ]
 })
