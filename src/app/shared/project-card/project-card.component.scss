@@ -1,0 +1,21 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  padding: 70px 60px;
+  width: 100%;
+  background-color: var(--color-neutral-70);
+
+  img {
+    width: 46px;
+    height: 46px;
+  }
+
+  p {
+    margin: 0;
+    color: var(--color-neutral-100);
+  }
+}
