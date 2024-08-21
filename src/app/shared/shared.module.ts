@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from './alert/alert.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
+import { ProjectCardComponent } from './project-card/project-card.component';
 
 @NgModule({
   declarations: [
     AlertComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProjectCardComponent
   ],
   imports: [
     CommonModule,
@@ -15,6 +17,7 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     HeaderComponent,
+    ProjectCardComponent,
     RouterModule
   ]
 })

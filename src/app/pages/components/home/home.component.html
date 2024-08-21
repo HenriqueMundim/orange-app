@@ -12,13 +12,13 @@
       </div>
     </div>
   </section>
-  <section class="projects-container">
-    <p>Meus Projetos</p>
+  <section class="projects">
+    <h6>Meus Projetos</h6>
     <form [formGroup]="searchFilter">
       <input type="text" formControlName="tag" placeholder="Buscar tags">
     </form>
-    <section class="projects">
-
+    <section class="projects-container">
+      <app-project-card class="without-project"></app-project-card>
     </section>
   </section>
 </main>
