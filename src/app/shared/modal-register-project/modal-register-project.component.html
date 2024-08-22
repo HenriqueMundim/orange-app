@@ -1,5 +1,5 @@
 <section>
-  <form>
+  <form formGroup="registerProjectForm">
     <h5>Adicionar projeto</h5>
     <div class="project-info-container">
       <div class="project-image">
@@ -8,12 +8,12 @@
           <img src="../../../assets/icons/collections.png" alt="">
           <small>Compartilhe seu talento com milhares de pessoas</small>
         </label>
-        <input id="file-upload" type="file" />
+        <input id="file-upload" type="file" #filePicker (change)="onImagePicked($event)"/>
       </div>
       <div class="project-info">
-        <input type="text" placeholder="Título">
-        <input type="text" placeholder="Tags">
-        <input type="text" placeholder="Link">
+        <input type="text" placeholder="Título" formControlName="title">
+        <input type="text" placeholder="Tags" formControlName="tags">
+        <input type="text" placeholder="Link" formControlName="link">
         <textarea placeholder="Descrição"></textarea>
       </div>
     </div>
