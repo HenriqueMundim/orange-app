@@ -52,6 +52,18 @@ h5 {
 h6 {
     font-size: 1.25rem !important;
 }
+
+.modal-open {
+  .modal {
+    .modal-dialog {
+      max-width: 900px;
+      height: 100vh;
+      margin-top: 150px;
+      padding: 0 24px;
+    }
+  }
+}
+
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 
