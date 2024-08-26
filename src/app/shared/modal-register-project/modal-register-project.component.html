@@ -5,8 +5,9 @@
       <div class="project-image">
         <p>Selecione o conteúdo que você deseja fazer upload</p>
         <label for="file-upload" class="custom-file-upload">
-          <img src="../../../assets/icons/collections.png" alt="">
-          <small>Compartilhe seu talento com milhares de pessoas</small>
+          <img src="../../../assets/icons/collections.png" alt="project image" *ngIf="registerProjectForm.get('image')?.value === null">
+          <small *ngIf="registerProjectForm.get('image')?.value === null">Compartilhe seu talento com milhares de pessoas</small>
+          <img src="" alt="project image" class="preview-project-image" #previewProject *ngIf="registerProjectForm.get('image')?.value !== null">
         </label>
         <input id="file-upload" type="file" #filePicker (change)="onImagePicked($event)"/>
       </div>
@@ -18,7 +19,7 @@
       </div>
     </div>
     <div class="button-container">
-      <button type="submit" id="save-button">Salvar</button>
+      <button type="button" id="save-button" (click)="registerProject()">Salvar</button>
       <button type="button" (click)="bsModalRef.hide()">Cancelar</button>
     </div>
   </form>
