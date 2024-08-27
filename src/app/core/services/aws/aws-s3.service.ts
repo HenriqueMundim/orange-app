@@ -9,9 +9,9 @@ export class AwsS3Service {
 
   constructor(private http: HttpClient) {}
 
-  public uploadFile(file: File, token: String) {
+  public uploadFile(file: File) {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'authRequired': 'true'
     })
 
     return this.http.get<{url: string}>(`${environment.url}/aws/getpresignedurl/upload`, {

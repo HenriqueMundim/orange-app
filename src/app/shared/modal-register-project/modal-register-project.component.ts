@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
 import { AwsS3Service } from 'src/app/core/services/aws/aws-s3.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { AwsS3Service } from 'src/app/core/services/aws/aws-s3.service';
   styleUrls: ['./modal-register-project.component.scss']
 })
 export class ModalRegisterProjectComponent implements OnInit {
+
+  @Input() userInfo: IuserInfo | undefined;
 
   public registerProjectForm: FormGroup = this.formBuilder.group({
     image: [null],
@@ -39,7 +42,7 @@ export class ModalRegisterProjectComponent implements OnInit {
   }
 
   public registerProject(): void {
-    this.awsS3Service.uploadFile(this.registerProjectForm.get("image")?.value, "")
+    this.awsS3Service.uploadFile(this.registerProjectForm.get("image")?.value)
   }
 
   private readFile(): void {

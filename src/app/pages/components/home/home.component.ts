@@ -31,24 +31,18 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private cookieService: CookieService,
     private router: Router,
     private formBuilder: FormBuilder,
     private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem("token") != null) {
-      this.token = localStorage.getItem("token");
-      this.getUserInfo()
-    } else if(this.cookieService.get("token") !== null) {
-      this.getGoogleUserInfo(this.cookieService.get("token"));
-    }
+    this.getUserInfo()
   }
 
 
   private getUserInfo() {
-    this.userService.getInfo(this.token).pipe(
+    this.userService.getInfo().pipe(
       catchError(err => {
           this.router.navigate(["/login"])
           return EMPTY;
@@ -58,21 +52,11 @@ export class HomeComponent implements OnInit {
       next: respose => this.userInfo = respose
     })
   }
-
-  private getGoogleUserInfo(token: String) {
-    this.userService.getInfo(token).pipe(
-      catchError(err => {
-          this.router.navigate(["/login"])
-          return EMPTY;
-      })
-    )
-    .subscribe({
-      next: (respose: IuserInfo) => this.userInfo = respose
-    })
-  }
-
   public registerProject(): void {
-    this.bsModalRef = this.modalService.show(ModalRegisterProjectComponent);
+    const initialState = {
+      userInfo: this.userInfo
+    }
+    this.bsModalRef = this.modalService.show(ModalRegisterProjectComponent, {initialState});
   }
 
 }

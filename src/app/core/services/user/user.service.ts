@@ -16,9 +16,9 @@ export class UserService {
       return this.http.post(`${environment.url}/enroll`, data)
   }
 
-  public getInfo(token: any): Observable<IuserInfo> {
+  public getInfo(): Observable<IuserInfo> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'authRequired': 'true'
     })
     return this.http.get<IuserInfo>(`${environment.url}/users`, {
       headers
