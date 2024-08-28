@@ -59,9 +59,9 @@ h6 {
     .modal-dialog {
       max-width: 900px;
       margin-top: 150px;
-      padding: 0 24px;
 
       &:has(app-modal-success-message) {
+        margin: 190px auto;
         padding: 0;
         max-width: 350px
       }

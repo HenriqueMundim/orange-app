@@ -10,7 +10,7 @@
           <img src="" alt="project image" class="preview-project-image" #previewProject *ngIf="registerProjectForm.get('image')?.value !== null">
         </label>
         <input id="file-upload" type="file" #filePicker (change)="onImagePicked($event)"/>
-        <p>Visualizar publicação</p>
+        <p class="preview-project-link">Visualizar publicação</p>
       </div>
       <div class="project-info">
         <input type="text" placeholder="Título" formControlName="title" (change)="onTitleChange($event)">

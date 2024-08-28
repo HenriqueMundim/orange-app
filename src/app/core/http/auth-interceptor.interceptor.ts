@@ -33,9 +33,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
   private shouldIntercept(request: HttpRequest<unknown>): boolean {
-    if(request.headers.get("authRequired")) {
-      return true;
-    }
-    return false;
+    return !!request.headers.get("authRequired");
   }
 }

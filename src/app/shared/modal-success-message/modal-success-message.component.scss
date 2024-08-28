@@ -29,6 +29,11 @@
     background-color: var(--color-secondary-100);
     text-transform: uppercase;
     font-size: 15px;
+  }
+}
 
+@media (max-width: 768px) {
+  .success-card {
+    padding: 32px 30px;
   }
 }
