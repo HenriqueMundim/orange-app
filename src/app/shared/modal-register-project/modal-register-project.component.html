@@ -13,10 +13,10 @@
         <p>Visualizar publicação</p>
       </div>
       <div class="project-info">
-        <input type="text" placeholder="Título" formControlName="title">
+        <input type="text" placeholder="Título" formControlName="title" (change)="onTitleChange($event)">
         <input type="text" placeholder="Tags" formControlName="tags">
-        <input type="text" placeholder="Link" formControlName="link">
-        <textarea placeholder="Descrição"></textarea>
+        <input type="text" placeholder="Link" formControlName="link" (change)="onLinkChange($event)">
+        <textarea placeholder="Descrição" (change)="onDescriptionChange($event)"></textarea>
       </div>
     </div>
     <div class="button-container">

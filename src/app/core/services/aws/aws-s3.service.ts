@@ -9,7 +9,7 @@ export class AwsS3Service {
 
   constructor(private http: HttpClient) {}
 
-  public uploadFile(file: File) {
+  public uploadFile(file: File, objectKey: string) {
     const headers = new HttpHeaders({
       'authRequired': 'true'
     })
@@ -17,7 +17,7 @@ export class AwsS3Service {
     return this.http.get<{url: string}>(`${environment.url}/aws/getpresignedurl/upload`, {
       headers,
       params: {
-        objectKey: file.name
+        objectKey: objectKey
       }
     }).subscribe({
       next: (respose) => {
