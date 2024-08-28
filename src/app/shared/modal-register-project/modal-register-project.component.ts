@@ -1,3 +1,4 @@
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -6,6 +7,7 @@ import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
 import { AwsS3Service } from 'src/app/core/services/aws/aws-s3.service';
 import { ProjectService } from 'src/app/core/services/project/project.service';
 import { awsBucketUrl, environment } from 'src/environments/environment.dev';
+import { ModalSuccessMessageComponent } from '../modal-success-message/modal-success-message.component';
 
 @Component({
   selector: 'app-modal-register-project',
@@ -36,6 +38,7 @@ export class ModalRegisterProjectComponent implements OnInit {
   @ViewChild('previewProject') previewProject!: ElementRef<HTMLImageElement>;
 
   constructor(
+    private bsModalService: BsModalService,
     public bsModalRef: BsModalRef,
     private formBuilder: FormBuilder,
     private awsS3Service: AwsS3Service,
@@ -81,6 +84,7 @@ export class ModalRegisterProjectComponent implements OnInit {
     this.projectService.registerProject(data).subscribe({
       next: response => {
         this.bsModalRef.hide()
+        this.bsModalService.show(ModalSuccessMessageComponent)
       }
     })
   }

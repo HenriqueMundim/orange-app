@@ -5,13 +5,15 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { ProjectCardComponent } from './project-card/project-card.component';
 import { ModalRegisterProjectComponent } from './modal-register-project/modal-register-project.component';
+import { ModalSuccessMessageComponent } from './modal-success-message/modal-success-message.component';
 
 @NgModule({
   declarations: [
     AlertComponent,
     HeaderComponent,
     ProjectCardComponent,
-    ModalRegisterProjectComponent
+    ModalRegisterProjectComponent,
+    ModalSuccessMessageComponent
   ],
   imports: [
     CommonModule,
