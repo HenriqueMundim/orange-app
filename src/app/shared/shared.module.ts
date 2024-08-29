@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ProjectCardComponent } from './project-card/project-card.component';
 import { ModalRegisterProjectComponent } from './modal-register-project/modal-register-project.component';
 import { ModalSuccessMessageComponent } from './modal-success-message/modal-success-message.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ModalSuccessMessageComponent } from './modal-success-message/modal-succ
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgMultiSelectDropDownModule
   ],
   exports: [
     HeaderComponent,

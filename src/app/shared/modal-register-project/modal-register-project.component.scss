@@ -1,3 +1,10 @@
+::ng-deep {
+  .dropdown-btn {
+    border: 1px solid red;
+  }
+}
+
+
 section {
   width: 100%;
   max-width: 900px;
@@ -54,7 +61,7 @@ section {
         gap: 24px;
         width: 50%;
 
-        input[type="text"], textarea {
+        input[type="text"], textarea, ng-multiselect-dropdown {
           width: 100%;
           padding: 16px 12px;
           border-radius: 4px;

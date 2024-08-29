@@ -9,13 +9,19 @@
           <small *ngIf="registerProjectForm.get('image')?.value === null">Compartilhe seu talento com milhares de pessoas</small>
           <img src="" alt="project image" class="preview-project-image" #previewProject *ngIf="registerProjectForm.get('image')?.value !== null">
         </label>
-        <input id="file-upload" type="file" #filePicker (change)="onImagePicked($event)"/>
+        <input id="file-upload" type="file" #filePicker (change)="onImagePicked($event)" accept="mage/png, image/jpeg"/>
         <p class="preview-project-link">Visualizar publicação</p>
       </div>
       <div class="project-info">
         <input type="text" placeholder="Título" formControlName="title" (change)="onTitleChange($event)">
-        <input type="text" placeholder="Tags" formControlName="tags">
-        <input type="text" placeholder="Link" formControlName="link" (change)="onLinkChange($event)">
+        <ng-multiselect-dropdown
+          [placeholder]="'Tags'"
+          [settings]="dropdownSettings"
+          [data]="dropdownList"
+          (onSelect)="onItemSelect($event)"
+          (onDeSelect)="onIntemDeSelect($event)"
+        >
+        </ng-multiselect-dropdown>
         <textarea placeholder="Descrição" (change)="onDescriptionChange($event)"></textarea>
       </div>
     </div>

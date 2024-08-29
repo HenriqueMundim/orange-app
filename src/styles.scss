@@ -69,8 +69,26 @@ h6 {
   }
 }
 
+.dropdown-btn {
+  border: none !important;
+  padding: 0 !important;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  color: var(--color-neutral-100);
+}
+
+.dropdown-multiselect__caret {
+  display: none !important;
+}
+
+.selected-item {
+  background-color: var(--color-neutral-100) !important;
+}
+
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+

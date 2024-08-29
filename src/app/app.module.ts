@@ -12,6 +12,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CookieService } from 'ngx-cookie-service';
 import { PagesModule } from './pages/pages.module';
 import { AuthInterceptor } from './core/http/auth-interceptor.interceptor';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AuthInterceptor } from './core/http/auth-interceptor.interceptor';
     BrowserAnimationsModule,
     ModalModule.forRoot(),
     SharedModule,
-    PagesModule
+    PagesModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     CookieService,
