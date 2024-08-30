@@ -22,6 +22,7 @@
           (onDeSelect)="onIntemDeSelect($event)"
         >
         </ng-multiselect-dropdown>
+        <input type="text" placeholder="Link" formControlName="link" (change)="onLinkChange($event)">
         <textarea placeholder="Descrição" (change)="onDescriptionChange($event)"></textarea>
       </div>
     </div>

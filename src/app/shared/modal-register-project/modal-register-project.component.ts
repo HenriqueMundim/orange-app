@@ -130,31 +130,29 @@ export class ModalRegisterProjectComponent implements OnInit {
 
   public registerProject(): void {
 
-    console.log(this.registerProjectForm.controls["tags"].value)
+    if(this.registerProjectForm.valid) {
+      const file: File = this.registerProjectForm.get("image")?.value;
 
-    // if(this.registerProjectForm.valid) {
-    //   const file: File = this.registerProjectForm.get("image")?.value;
+      this.getPresignedUrl(file, this.objectKey);
+      this.uploadFile(this.preSignedUrl, file);
 
-    //   this.getPresignedUrl(file, this.objectKey);
-    //   this.uploadFile(this.preSignedUrl, file);
+      if(this.uploadSuccessful) {
+        const data: IprojectRegister = {
+          title: this.previewProjectInfo.title,
+          link: this.previewProjectInfo.link,
+          description: this.previewProjectInfo.description,
+          imageUrl: awsBucketUrl + this.objectKey,
+          userId: this.userInfo!.id
+        }
 
-    //   if(this.uploadSuccessful) {
-    //     const data: IprojectRegister = {
-    //       title: this.previewProjectInfo.title,
-    //       link: this.previewProjectInfo.link,
-    //       description: this.previewProjectInfo.description,
-    //       imageUrl: awsBucketUrl + this.objectKey,
-    //       userId: this.userInfo!.id
-    //     }
-
-    //     this.projectService.registerProject(data).subscribe({
-    //       next: response => {
-    //         this.bsModalRef.hide()
-    //         this.bsModalService.show(ModalSuccessMessageComponent)
-    //       }
-    //     })
-    //   }
-    // }
+        this.projectService.registerProject(data).subscribe({
+          next: response => {
+            this.bsModalRef.hide()
+            this.bsModalService.show(ModalSuccessMessageComponent)
+          }
+        })
+      }
+    }
   }
 
   private readFile(): void {
