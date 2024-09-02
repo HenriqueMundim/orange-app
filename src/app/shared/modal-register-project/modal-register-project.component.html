@@ -1,5 +1,5 @@
 <section>
-  <form formGroup="registerProjectForm">
+  <form [formGroup]="registerProjectForm">
     <h5>Adicionar projeto</h5>
     <div class="project-info-container">
       <div class="project-image">
@@ -23,7 +23,7 @@
         >
         </ng-multiselect-dropdown>
         <input type="text" placeholder="Link" formControlName="link" (change)="onLinkChange($event)">
-        <textarea placeholder="Descrição" (change)="onDescriptionChange($event)"></textarea>
+        <textarea placeholder="Descrição" formControlName="description" (change)="onDescriptionChange($event)"></textarea>
       </div>
     </div>
     <div class="button-container">

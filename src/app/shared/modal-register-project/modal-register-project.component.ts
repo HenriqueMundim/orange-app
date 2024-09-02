@@ -8,11 +8,13 @@ import { AwsS3Service } from 'src/app/core/services/aws/aws-s3.service';
 import { ProjectService } from 'src/app/core/services/project/project.service';
 import { awsBucketUrl } from 'src/environments/environment.dev';
 import { ModalSuccessMessageComponent } from '../modal-success-message/modal-success-message.component';
-import { catchError, EMPTY } from 'rxjs';
+import { catchError, EMPTY, map } from 'rxjs';
 import { AlertService } from '../services/alert.service';
 import { AlertTypes } from 'src/app/core/enums/alertType';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ListItem } from 'ng-multiselect-dropdown/multiselect.model';
+import { CategoryService } from 'src/app/core/services/project/category.service';
+import { IProjectCategory } from 'src/app/core/interfaces/Iproject-category';
 
 @Component({
   selector: 'app-modal-register-project',
@@ -37,10 +39,15 @@ export class ModalRegisterProjectComponent implements OnInit {
     ],
     tags: [[],
       [
-        Validators.required
+        Validators.minLength(1)
       ]
     ],
     link: ['',
+      [
+        Validators.required
+      ]
+    ],
+    description: ['',
       [
         Validators.required
       ]
@@ -51,7 +58,8 @@ export class ModalRegisterProjectComponent implements OnInit {
     link: "",
     description: "",
     imageUrl: "",
-    userId: 0
+    userId: 0,
+    categories: []
   };
   private uploadSuccessful: Boolean = false;
   private preSignedUrl = "";
@@ -64,29 +72,33 @@ export class ModalRegisterProjectComponent implements OnInit {
     private formBuilder: FormBuilder,
     private awsS3Service: AwsS3Service,
     private projectService: ProjectService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private categoryService: CategoryService
   ) { }
 
-  dropdownList = [{}];
+  dropdownList: Array<IProjectCategory> = [];
   selectedItems = [{}];
   dropdownSettings!: IDropdownSettings;
 
   ngOnInit() {
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
-    ];
+    this.categoryService.getAll().pipe(
+      catchError((err) => {
+        console.log(err)
+        return EMPTY;
+      })
+    )
+    .subscribe({
+      next: response => this.dropdownList = response
+    })
+
     this.selectedItems = [
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' }
+      { id: 3, name: 'Pune' },
+      { id: 4, name: 'Navsari' }
     ];
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
+      idField: 'id',
+      textField: 'name',
       selectAllText: undefined,
       unSelectAllText: undefined,
       enableCheckAll: false,
@@ -98,6 +110,7 @@ export class ModalRegisterProjectComponent implements OnInit {
 
   public onItemSelect(event: ListItem): void {
     this.registerProjectForm.get("tags")?.value.push(event)
+    this.previewProjectInfo.categories.push({id: Number(event.id), name: String(event.text)});
   }
 
   public onIntemDeSelect(event: ListItem): void {
@@ -129,24 +142,25 @@ export class ModalRegisterProjectComponent implements OnInit {
   }
 
   public registerProject(): void {
-
     if(this.registerProjectForm.valid) {
       const file: File = this.registerProjectForm.get("image")?.value;
 
       this.getPresignedUrl(file, this.objectKey);
-      this.uploadFile(this.preSignedUrl, file);
 
       if(this.uploadSuccessful) {
+
         const data: IprojectRegister = {
           title: this.previewProjectInfo.title,
           link: this.previewProjectInfo.link,
           description: this.previewProjectInfo.description,
           imageUrl: awsBucketUrl + this.objectKey,
-          userId: this.userInfo!.id
+          userId: this.userInfo!.id,
+          categories: this.registerProjectForm.controls["tags"].value
         }
 
         this.projectService.registerProject(data).subscribe({
           next: response => {
+            console.log(response)
             this.bsModalRef.hide()
             this.bsModalService.show(ModalSuccessMessageComponent)
           }
@@ -165,13 +179,14 @@ export class ModalRegisterProjectComponent implements OnInit {
     this.awsS3Service.getPresignedUrl(file, this.objectKey)
       .pipe(
         catchError(err => {
+          console.group("OK")
           this.alertService.showAlert("Não foi possível fazer o upload da imagem", AlertTypes.DANGER);
           this.uploadSuccessful = false;
           return EMPTY;
         })
       )
       .subscribe({
-        next: (respose) => this.preSignedUrl = respose.url
+        next: (respose) => this.uploadFile(respose.url, file)
       })
   }
 
@@ -179,6 +194,7 @@ export class ModalRegisterProjectComponent implements OnInit {
     this.awsS3Service.uploadFile(url, file)
       .pipe(
         catchError(err => {
+          console.log(err)
           this.alertService.showAlert("Não foi possível fazer o upload da imagem", AlertTypes.DANGER);
           this.uploadSuccessful = false;
           return EMPTY;

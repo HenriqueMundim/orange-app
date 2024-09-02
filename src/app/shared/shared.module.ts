@@ -7,6 +7,7 @@ import { ProjectCardComponent } from './project-card/project-card.component';
 import { ModalRegisterProjectComponent } from './modal-register-project/modal-register-project.component';
 import { ModalSuccessMessageComponent } from './modal-success-message/modal-success-message.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
   imports: [
     CommonModule,
     RouterModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
