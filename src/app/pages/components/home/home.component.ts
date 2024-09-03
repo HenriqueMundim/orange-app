@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   private token: string | null = "";
   private bsModalRef?: BsModalRef
-  public projects!: Array<Iproject>
+  public projects: Array<Iproject> = []
 
   public userInfo: IuserInfo = {
     id: 0,
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUserInfo()
+    this.getUserInfo();
   }
 
   private getUserInfo() {
@@ -52,12 +52,22 @@ export class HomeComponent implements OnInit {
       })
     )
     .subscribe({
-      next: respose => this.userInfo = respose
+      next: respose => this.userInfo = respose,
+      complete: () => this.getUsersProjects()
     })
   }
 
   private getUsersProjects(): void {
-
+    this.projectService.getAllUserProjects(this.userInfo.id)
+      .pipe(
+        catchError(error => {
+          return EMPTY;
+        })
+      )
+      .subscribe({
+        next: respose => this.projects = respose.content,
+        complete: () => console.log(this.projects)
+      })
   }
 
   public registerProject(): void {
