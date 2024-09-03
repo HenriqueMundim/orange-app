@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Iproject } from 'src/app/core/interfaces/Iproject';
+import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
 
 @Component({
   selector: 'app-project-card',
@@ -9,6 +10,7 @@ import { Iproject } from 'src/app/core/interfaces/Iproject';
 export class ProjectCardComponent implements OnInit {
 
   @Input("projectInfo") projectInfo!: Iproject;
+  @Input("userInfo") userInfo!: IuserInfo;
 
   constructor() { }
 
