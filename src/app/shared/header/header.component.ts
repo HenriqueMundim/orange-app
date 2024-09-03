@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private closeMenu(event: Event) {
-    if (this.isMenuOpen === true && event.target != this.openMenu?.nativeElement && event.target != this.dropdownMenu?.nativeElement) {
+    if (this.isMenuOpen && event.target != this.openMenu?.nativeElement && event.target != this.dropdownMenu?.nativeElement) {
       console.log("close");
       this.dropdownMenu!.nativeElement.style.display="none";
     }

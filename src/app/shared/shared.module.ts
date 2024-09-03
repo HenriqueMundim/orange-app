@@ -4,20 +4,29 @@ import { AlertComponent } from './alert/alert.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { ProjectCardComponent } from './project-card/project-card.component';
+import { ModalRegisterProjectComponent } from './modal-register-project/modal-register-project.component';
+import { ModalSuccessMessageComponent } from './modal-success-message/modal-success-message.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AlertComponent,
     HeaderComponent,
-    ProjectCardComponent
+    ProjectCardComponent,
+    ModalRegisterProjectComponent,
+    ModalSuccessMessageComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgMultiSelectDropDownModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
     ProjectCardComponent,
+    ModalRegisterProjectComponent,
     RouterModule
   ]
 })

@@ -1,0 +1,39 @@
+.success-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  height: 250px;
+  padding: 32px 48px;
+  text-align: center;
+
+  .success-message {
+    font-weight: 400;
+  }
+
+  .success-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  button {
+    width: 100%;
+    padding: 8px 22px;
+
+    border-radius: 8px;
+    border: none;
+
+    color: var(--color-neutral-60);
+    background-color: var(--color-secondary-100);
+    text-transform: uppercase;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .success-card {
+    padding: 32px 30px;
+  }
+}

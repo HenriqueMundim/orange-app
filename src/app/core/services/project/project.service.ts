@@ -1,27 +1,23 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IinputUser } from '../../interfaces/Iinput-user.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.dev';
-import { IuserInfo } from '../../interfaces/IuserInfo.interface';
+import { IprojectRegister } from '../../interfaces/IprojectRegister';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
-  public create(data: IinputUser) {
-      return this.http.post(`${environment.url}/enroll`, data)
-  }
-
-  public getInfo(): Observable<IuserInfo> {
+  public registerProject(data: IprojectRegister): Observable<any> {
     const headers = new HttpHeaders({
       'authRequired': 'true'
     })
-    return this.http.get<IuserInfo>(`${environment.url}/users`, {
+    return this.http.post(environment.url + "/projects", data, {
       headers
     })
   }
+
 }
