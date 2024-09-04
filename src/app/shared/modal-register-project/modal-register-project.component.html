@@ -5,9 +5,9 @@
       <div class="project-image">
         <p>Selecione o conteúdo que você deseja fazer upload</p>
         <label for="file-upload" class="custom-file-upload">
-          <img src="../../../assets/icons/collections.png" alt="project image" *ngIf="registerProjectForm.get('image')?.value === null">
-          <small *ngIf="registerProjectForm.get('image')?.value === null">Compartilhe seu talento com milhares de pessoas</small>
-          <img src="" alt="project image" class="preview-project-image" #previewProject *ngIf="registerProjectForm.get('image')?.value !== null">
+          <img src="../../../assets/icons/collections.png" alt="project image" *ngIf="registerProjectForm.get('image')?.value === null && projectInfo === undefined">
+          <small *ngIf="registerProjectForm.get('image')?.value === null && projectInfo === undefined">Compartilhe seu talento com milhares de pessoas</small>
+          <img src="" alt="project image" class="preview-project-image" #previewProject *ngIf="registerProjectForm.get('image')?.value !== null || projectInfo !== undefined">
         </label>
         <input id="file-upload" type="file" #filePicker (change)="onImagePicked($event)" accept="mage/png, image/jpeg"/>
         <p class="preview-project-link">Visualizar publicação</p>
@@ -15,6 +15,7 @@
       <div class="project-info">
         <input type="text" placeholder="Título" formControlName="title" (change)="onTitleChange($event)">
         <ng-multiselect-dropdown
+          #categorySelect
           [placeholder]="'Tags'"
           [settings]="dropdownSettings"
           [data]="dropdownList"

@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Iproject } from 'src/app/core/interfaces/Iproject';
 import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
 import { ModalRegisterProjectComponent } from '../modal-register-project/modal-register-project.component';
+import { RegisterComponent } from 'src/app/pages/components/register/register.component';
 
 @Component({
   selector: 'app-project-card',
@@ -40,5 +41,14 @@ export class ProjectCardComponent implements OnInit {
     if (this.isMenuOpen && event.target != this.openMenuEdit?.nativeElement && event.target != this.dropdownMenuProject?.nativeElement) {
       this.dropdownMenuProject!.nativeElement.style.display="none";
     }
+  }
+
+  public openEditModal(): void {
+    const initialState = {
+      userInfo: this.userInfo,
+      projectInfo: this.projectInfo
+    }
+
+    this.bsModalService.show(ModalRegisterProjectComponent, { initialState: initialState })
   }
 }

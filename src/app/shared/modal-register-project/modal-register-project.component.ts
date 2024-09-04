@@ -1,5 +1,5 @@
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IprojectRegister } from 'src/app/core/interfaces/IprojectRegister';
@@ -11,7 +11,7 @@ import { ModalSuccessMessageComponent } from '../modal-success-message/modal-suc
 import { catchError, EMPTY, map } from 'rxjs';
 import { AlertService } from '../services/alert.service';
 import { AlertTypes } from 'src/app/core/enums/alertType';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IDropdownSettings, MultiSelectComponent } from 'ng-multiselect-dropdown';
 import { ListItem } from 'ng-multiselect-dropdown/multiselect.model';
 import { CategoryService } from 'src/app/core/services/project/category.service';
 import { IProjectCategory } from 'src/app/core/interfaces/Iproject-category';
@@ -21,7 +21,7 @@ import { IProjectCategory } from 'src/app/core/interfaces/Iproject-category';
   templateUrl: './modal-register-project.component.html',
   styleUrls: ['./modal-register-project.component.scss'],
 })
-export class ModalRegisterProjectComponent implements OnInit {
+export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
 
   @Input() userInfo: IuserInfo | undefined;
   @Input() projectInfo: IprojectRegister | undefined
@@ -65,7 +65,8 @@ export class ModalRegisterProjectComponent implements OnInit {
   private uploadSuccessful: Boolean = false;
   private preSignedUrl = "";
 
-  @ViewChild('previewProject') previewProject!: ElementRef<HTMLImageElement>;
+  @ViewChild('previewProject') previewProject: ElementRef<HTMLImageElement> | undefined;
+  @ViewChild('categorySelect') categorySelect!: MultiSelectComponent;
 
   constructor(
     private bsModalService: BsModalService,
@@ -78,10 +79,18 @@ export class ModalRegisterProjectComponent implements OnInit {
   ) { }
 
   dropdownList: Array<IProjectCategory> = [];
-  selectedItems = [{}];
   dropdownSettings!: IDropdownSettings;
 
   ngOnInit() {
+    if (this.projectInfo) {
+      this.registerProjectForm.patchValue({
+        title: this.projectInfo.title,
+        tags: this.projectInfo.categories,
+        link: this.projectInfo.link,
+        description: this.projectInfo.description
+      });
+    }
+
     this.categoryService.getAll().pipe(
       catchError((err) => {
         console.log(err)
@@ -92,10 +101,6 @@ export class ModalRegisterProjectComponent implements OnInit {
       next: response => this.dropdownList = response
     })
 
-    this.selectedItems = [
-      { id: 3, name: 'Pune' },
-      { id: 4, name: 'Navsari' }
-    ];
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
@@ -107,6 +112,13 @@ export class ModalRegisterProjectComponent implements OnInit {
       allowSearchFilter: false,
       limitSelection: 2
     };
+  }
+
+  ngAfterViewInit(): void {
+    if (this.projectInfo && this.previewProject) {
+      this.previewProject!.nativeElement.src=this.projectInfo.imageUrl
+      this.categorySelect.writeValue(this.projectInfo.categories)
+    }
   }
 
   public onItemSelect(event: ListItem): void {
@@ -173,7 +185,7 @@ export class ModalRegisterProjectComponent implements OnInit {
   private readFile(): void {
     const reader = new FileReader();
     reader.readAsDataURL(this.registerProjectForm.controls["image"].value)
-    reader.onload = event => this.previewProject.nativeElement.src = reader.result as string
+    reader.onload = event => this.previewProject!.nativeElement.src = reader.result as string
   }
 
   private getPresignedUrl(file: File, objectKey: string): void {
