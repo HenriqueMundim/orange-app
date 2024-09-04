@@ -7,13 +7,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from '../shared/shared.module';
+import { DeleteProjectModalComponent } from './components/delete-project-modal/delete-project-modal.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    DeleteProjectModalComponent
   ],
   imports: [
     CommonModule,

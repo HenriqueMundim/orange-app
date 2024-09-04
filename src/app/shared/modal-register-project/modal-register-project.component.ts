@@ -182,6 +182,10 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public editProject(): void {
+    console.log(this.registerProjectForm.get("image")?.value)
+  }
+
   private readFile(): void {
     const reader = new FileReader();
     reader.readAsDataURL(this.registerProjectForm.controls["image"].value)
