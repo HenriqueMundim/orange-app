@@ -24,6 +24,7 @@ import { IProjectCategory } from 'src/app/core/interfaces/Iproject-category';
 export class ModalRegisterProjectComponent implements OnInit {
 
   @Input() userInfo: IuserInfo | undefined;
+  @Input() projectInfo: IprojectRegister | undefined
 
   private objectKey = "";
   public registerProjectForm: FormGroup = this.formBuilder.group({

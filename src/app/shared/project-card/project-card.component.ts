@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Iproject } from 'src/app/core/interfaces/Iproject';
 import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
+import { ModalRegisterProjectComponent } from '../modal-register-project/modal-register-project.component';
 
 @Component({
   selector: 'app-project-card',
@@ -8,14 +10,35 @@ import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
   styleUrls: ['./project-card.component.scss']
 })
 export class ProjectCardComponent implements OnInit {
+  @ViewChild("dropdownMenuProject") dropdownMenuProject: ElementRef<HTMLElement> | undefined
+  @ViewChild("openMenuEdit") openMenuEdit: ElementRef<HTMLImageElement> | undefined
 
   @Input("projectInfo") projectInfo!: Iproject;
   @Input("userInfo") userInfo!: IuserInfo;
 
-  constructor() { }
+  private clickListener: () => void;
+  private isMenuOpen = false;
 
-  ngOnInit(): void {
-    console.log(this.projectInfo)
+  constructor(
+    private bsModalService: BsModalService,
+    private render: Renderer2
+  ) {
+    this.clickListener = this.render.listen('document', 'click', (event: MouseEvent) => {
+      this.closeMenu(event);
+    });
   }
 
+  ngOnInit(): void {
+  }
+
+  public showEditProjectMenu(): void {
+    this.isMenuOpen = true;
+    this.dropdownMenuProject!.nativeElement.style.display="block";
+  }
+
+  private closeMenu(event: Event) {
+    if (this.isMenuOpen && event.target != this.openMenuEdit?.nativeElement && event.target != this.dropdownMenuProject?.nativeElement) {
+      this.dropdownMenuProject!.nativeElement.style.display="none";
+    }
+  }
 }

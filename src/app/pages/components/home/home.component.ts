@@ -1,6 +1,6 @@
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, EMPTY } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
 import { Router } from '@angular/router';
@@ -66,7 +66,6 @@ export class HomeComponent implements OnInit {
       )
       .subscribe({
         next: respose => this.projects = respose.content,
-        complete: () => console.log(this.projects)
       })
   }
 

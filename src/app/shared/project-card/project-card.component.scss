@@ -42,6 +42,33 @@
       cursor: pointer;
     }
 
+    .dropdown-menu-project {
+      display: none;
+
+      width: 200px;
+      height: 100px;
+      border-radius: 8px;
+
+      position: absolute;
+      top: 56px;
+      right: 16px;
+
+      background-color: var(--color-neutral-60);
+
+      ul {
+        padding: 8px 0;
+
+        li {
+          padding: 8px 24px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: var(--color-neutral-80);
+          }
+        }
+      }
+    }
+
     .project-image {
       object-fit: fill;
       object-position: center;

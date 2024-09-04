@@ -1,8 +1,6 @@
-import { IuserInfo } from './../../core/interfaces/IuserInfo.interface';
 import { CookieService } from 'ngx-cookie-service';
-import { Component, ElementRef, HostListener, Inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { catchError, EMPTY } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -47,7 +45,6 @@ export class HeaderComponent implements OnInit {
 
   private closeMenu(event: Event) {
     if (this.isMenuOpen && event.target != this.openMenu?.nativeElement && event.target != this.dropdownMenu?.nativeElement) {
-      console.log("close");
       this.dropdownMenu!.nativeElement.style.display="none";
     }
   }

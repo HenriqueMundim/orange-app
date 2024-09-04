@@ -5,7 +5,13 @@
 </div>
 <div class="card-with-project" *ngIf="projectInfo != undefined">
   <div class="image-container">
-    <img src="../../../assets/icons/icon_edit.svg" alt="edit icon" class="edit-button">
+    <img src="../../../assets/icons/icon_edit.svg" alt="edit icon" class="edit-button" (click)="showEditProjectMenu()" #openMenuEdit>
+    <nav class="dropdown-menu-project" #dropdownMenuProject>
+      <ul>
+        <li>Editar</li>
+        <li>Deletar</li>
+      </ul>
+    </nav>
     <img [src]="projectInfo.imageUrl" alt="project image" style="width: 100%;" class="project-image">
   </div>
   <div class="info-container">
