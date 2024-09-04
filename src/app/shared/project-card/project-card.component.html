@@ -9,7 +9,7 @@
     <nav class="dropdown-menu-project" #dropdownMenuProject>
       <ul>
         <li (click)="openEditModal()">Editar</li>
-        <li>Deletar</li>
+        <li (click)="deleteProject()">Deletar</li>
       </ul>
     </nav>
     <img [src]="projectInfo.imageUrl" alt="project image" style="width: 100%;" class="project-image">

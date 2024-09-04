@@ -4,6 +4,7 @@ import { Iproject } from 'src/app/core/interfaces/Iproject';
 import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
 import { ModalRegisterProjectComponent } from '../modal-register-project/modal-register-project.component';
 import { RegisterComponent } from 'src/app/pages/components/register/register.component';
+import { DeleteProjectModalComponent } from 'src/app/pages/components/delete-project-modal/delete-project-modal.component';
 
 @Component({
   selector: 'app-project-card',
@@ -50,5 +51,9 @@ export class ProjectCardComponent implements OnInit {
     }
 
     this.bsModalService.show(ModalRegisterProjectComponent, { initialState: initialState })
+  }
+
+  public deleteProject(): void {
+    this.bsModalService.show(DeleteProjectModalComponent);
   }
 }

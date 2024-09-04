@@ -65,6 +65,13 @@ h6 {
         padding: 0;
         max-width: 350px
       }
+
+      &:has(app-delete-project-modal) {
+        margin: 295px auto;
+
+        padding: 0;
+        max-width: 420px;
+      }
     }
   }
 }
