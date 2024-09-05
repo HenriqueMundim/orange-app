@@ -1,7 +1,9 @@
+import { AwsS3Service } from 'src/app/core/services/aws/aws-s3.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { catchError, EMPTY } from 'rxjs';
+import { catchError, EMPTY, mergeMap } from 'rxjs';
 import { ProjectService } from 'src/app/core/services/project/project.service';
+import { Iproject } from 'src/app/core/interfaces/Iproject';
 
 @Component({
   selector: 'app-delete-project-modal',
@@ -10,27 +12,31 @@ import { ProjectService } from 'src/app/core/services/project/project.service';
 })
 export class DeleteProjectModalComponent implements OnInit {
 
-  @Input() projectId!: number
+  @Input() projectInfo!: Iproject
 
   constructor(
     private bsModalService: BsModalService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private awsS3Service: AwsS3Service
   ) { }
 
   ngOnInit(): void {
   }
 
   public deleteProject(): void {
-    this.projectService.deleteProject(this.projectId)
-      .pipe(
-        catchError(() => EMPTY)
-      )
-      .subscribe({
-        next: () => {
-          this.bsModalService.hide();
-          location.reload();
-        }
-      })
+    const objectKey = this.projectInfo.imageUrl.slice(46)
+    this.awsS3Service.deleteFile(objectKey).pipe(
+      catchError(() => EMPTY),
+      mergeMap(() => {
+        return this.projectService.deleteProject(this.projectInfo.id)
+      }),
+      catchError(() => EMPTY)
+    ).subscribe({
+      next: () => {
+        this.closeModal();
+        location.reload();
+      }
+    })
   }
 
   public closeModal(): void {

@@ -13,12 +13,12 @@ export class AwsS3Service {
 
   constructor(private http: HttpClient) {}
 
-  public getPresignedUrl(file: File, objectKey: string): Observable<IpreSignedUrl> {
+  public getPresignedUrl(file: File, objectKey: string, method: string): Observable<IpreSignedUrl> {
     const headers = new HttpHeaders({
       'authRequired': 'true'
     })
 
-    return this.http.get<IpreSignedUrl>(`${environment.url}/aws/getpresignedurl/upload`, {
+    return this.http.get<IpreSignedUrl>(`${environment.url}/aws/getpresignedurl/${method}`, {
       headers,
       params: {
         objectKey: objectKey
@@ -28,5 +28,20 @@ export class AwsS3Service {
 
   public uploadFile(url: string, file: File) {
     return this.http.put(url, file);
+  }
+
+  public deleteFile(objectKey: string) {
+    const headers = new HttpHeaders({
+      'authRequired': 'true'
+    })
+
+    return this.http.delete(`${environment.url}/aws/delete`,
+      {
+        headers,
+        params: {
+          objectKey
+        }
+      }
+    )
   }
 }

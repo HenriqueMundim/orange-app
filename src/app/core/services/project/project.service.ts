@@ -40,7 +40,7 @@ export class ProjectService {
     )
   }
 
-  public deleteProject(id: number) {
+  public deleteProject(id: number): Observable<void> {
     const headers = new HttpHeaders({
       'authRequired': 'true'
     })

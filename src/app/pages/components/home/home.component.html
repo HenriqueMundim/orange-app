@@ -18,7 +18,7 @@
       <input type="text" formControlName="tag" placeholder="Buscar tags">
     </form>
     <section class="projects-container">
-      <app-project-card class="without-project" *ngIf="projects === undefined || projects === null"></app-project-card>
+      <app-project-card class="without-project" *ngIf="projects.length === 0"></app-project-card>
 
       <ng-container *ngIf="projects.length > 0">
         <app-project-card *ngFor="let project of projects" [projectInfo]="project" [userInfo]="userInfo" class="without-project"></app-project-card>

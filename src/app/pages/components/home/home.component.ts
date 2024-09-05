@@ -65,7 +65,11 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe({
-        next: respose => this.projects = respose.content,
+        next: respose => {
+          if (respose) {
+            this.projects = respose.content
+          }
+        },
       })
   }
 

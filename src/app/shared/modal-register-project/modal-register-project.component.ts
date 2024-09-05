@@ -173,7 +173,7 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
   }
 
   private getPresignedUrl(file: File, objectKey: string): void {
-    this.awsS3Service.getPresignedUrl(file, this.objectKey)
+    this.awsS3Service.getPresignedUrl(file, this.objectKey, "upload")
       .pipe(
         catchError(err => {
           console.group("OK")
