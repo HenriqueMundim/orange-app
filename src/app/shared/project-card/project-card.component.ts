@@ -54,6 +54,9 @@ export class ProjectCardComponent implements OnInit {
   }
 
   public deleteProject(): void {
-    this.bsModalService.show(DeleteProjectModalComponent);
+    const initialState = {
+      projectId: this.projectInfo.id
+    }
+    this.bsModalService.show(DeleteProjectModalComponent, { initialState });
   }
 }

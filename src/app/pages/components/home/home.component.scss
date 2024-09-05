@@ -51,12 +51,24 @@ main {
     .projects-container {
       display: flex;
       padding: 40px 0;
+      flex-wrap: wrap;
       gap: 24px;
 
       .without-project, .with-project {
         width: 100%;
         max-width: 390px;
         border-radius: 8px;
+        flex: 0 0 calc(33.333% - 16px)
+      }
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  main {
+    .projects {
+      .projects-container {
+
       }
     }
   }

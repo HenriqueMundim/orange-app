@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { catchError, EMPTY } from 'rxjs';
+import { ProjectService } from 'src/app/core/services/project/project.service';
 
 @Component({
   selector: 'app-delete-project-modal',
@@ -8,15 +10,27 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 })
 export class DeleteProjectModalComponent implements OnInit {
 
+  @Input() projectId!: number
+
   constructor(
-    private bsModalService: BsModalService
+    private bsModalService: BsModalService,
+    private projectService: ProjectService
   ) { }
 
   ngOnInit(): void {
   }
 
   public deleteProject(): void {
-
+    this.projectService.deleteProject(this.projectId)
+      .pipe(
+        catchError(() => EMPTY)
+      )
+      .subscribe({
+        next: () => {
+          this.bsModalService.hide();
+          location.reload();
+        }
+      })
   }
 
   public closeModal(): void {

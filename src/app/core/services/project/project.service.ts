@@ -40,4 +40,15 @@ export class ProjectService {
     )
   }
 
+  public deleteProject(id: number) {
+    const headers = new HttpHeaders({
+      'authRequired': 'true'
+    })
+
+    return this.http.delete<void>(`${environment.url}/projects/${id}`,
+      {
+        headers
+      }
+    )
+  }
 }

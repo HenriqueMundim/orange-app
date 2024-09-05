@@ -159,26 +159,6 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
       const file: File = this.registerProjectForm.get("image")?.value;
 
       this.getPresignedUrl(file, this.objectKey);
-
-      if(this.uploadSuccessful) {
-
-        const data: IprojectRegister = {
-          title: this.previewProjectInfo.title,
-          link: this.previewProjectInfo.link,
-          description: this.previewProjectInfo.description,
-          imageUrl: awsBucketUrl + this.objectKey,
-          userId: this.userInfo!.id,
-          categories: this.registerProjectForm.controls["tags"].value
-        }
-
-        this.projectService.registerProject(data).subscribe({
-          next: response => {
-            console.log(response)
-            this.bsModalRef.hide()
-            this.bsModalService.show(ModalSuccessMessageComponent)
-          }
-        })
-      }
     }
   }
 
@@ -211,14 +191,32 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
     this.awsS3Service.uploadFile(url, file)
       .pipe(
         catchError(err => {
-          console.log(err)
           this.alertService.showAlert("Não foi possível fazer o upload da imagem", AlertTypes.DANGER);
           this.uploadSuccessful = false;
           return EMPTY;
         })
       )
       .subscribe({
-        next: () => this.uploadSuccessful = true
+        next: () => this.uploadProject()
+      })
+  }
+
+  private uploadProject() {
+      const data: IprojectRegister = {
+        title: this.previewProjectInfo.title,
+        link: this.previewProjectInfo.link,
+        description: this.previewProjectInfo.description,
+        imageUrl: awsBucketUrl + this.objectKey,
+        userId: this.userInfo!.id,
+        categories: this.registerProjectForm.controls["tags"].value
+      }
+
+      this.projectService.registerProject(data).subscribe({
+        next: response => {
+          console.log(response)
+          this.bsModalRef.hide()
+          this.bsModalService.show(ModalSuccessMessageComponent)
+        }
       })
   }
 }
