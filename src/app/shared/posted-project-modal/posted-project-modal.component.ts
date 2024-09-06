@@ -1,5 +1,5 @@
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { IpreviewProject } from 'src/app/core/interfaces/IpreviewProject';
 
 @Component({
@@ -10,6 +10,8 @@ import { IpreviewProject } from 'src/app/core/interfaces/IpreviewProject';
 export class PostedProjectModalComponent implements OnInit {
 
   @Input('projectInfo') projectInfo!: IpreviewProject
+  @Input('modalId') modalId!: any
+  public viewSize: number = 0;
 
   constructor(
     private bsModalRef: BsModalRef,
@@ -17,9 +19,18 @@ export class PostedProjectModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.viewSize = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  private onResize(event: Event) {
+    const windowtarget = event.target as Window
+
+    this.viewSize = windowtarget.innerWidth;
   }
 
   public closePreview(): void {
     this.bsModalService.hide(this.bsModalRef.id);
+    this.modalId.setClass("show")
   }
 }

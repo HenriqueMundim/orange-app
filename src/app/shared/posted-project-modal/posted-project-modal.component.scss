@@ -66,3 +66,24 @@ section {
     }
   }
 }
+
+@media (max-width: 768px) {
+  section {
+    padding: 48px 24px;
+    gap: 0px;
+    border-radius: 24px 24px 0 0;
+
+    .project-title {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .project-image {
+      margin-bottom: 8px;
+    }
+
+    .card-header {
+      margin-bottom: 24px;
+    }
+  }
+}

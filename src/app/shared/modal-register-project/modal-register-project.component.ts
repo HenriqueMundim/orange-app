@@ -280,20 +280,22 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
   }
 
   public previewProjectShow(): void {
-    let initialState: { projectInfo: IpreviewProject };
+    let initialState: { projectInfo: IpreviewProject, modalId: any};
 
     if (this.projectInfo) {
       initialState = {
-        projectInfo: this.previewProjectInfo
+        projectInfo: this.previewProjectInfo,
+        modalId: this.bsModalRef
       }
+      this.bsModalRef.setClass("hide")
       this.bsModalService.show(PostedProjectModalComponent, { initialState })
     } else {
       if (this.registerProjectForm.valid) {
         this.previewProjectInfo.author = this.userInfo;
         initialState = {
-          projectInfo: this.previewProjectInfo
+          projectInfo: this.previewProjectInfo,
+          modalId: this.bsModalRef
         }
-
         this.bsModalService.show(PostedProjectModalComponent, { initialState })
       }
     }

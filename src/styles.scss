@@ -55,10 +55,14 @@ h6 {
 
 .modal-open {
   .modal {
-    padding: 0 24px;
     .modal-dialog {
       max-width: 900px;
       margin-top: 150px;
+      padding: 0 24px;
+
+      &:has(app-modal-register-project) {
+        padding: 0;
+      }
 
       &:has(app-modal-success-message) {
         margin: 190px auto;
@@ -68,7 +72,6 @@ h6 {
 
       &:has(app-delete-project-modal) {
         margin: 295px auto;
-
         padding: 0;
         max-width: 420px;
       }
@@ -76,9 +79,18 @@ h6 {
       &:has(app-posted-project-modal) {
         margin: 134px auto;
         max-width: 1042px;
+        padding: 0;
       }
     }
   }
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
 }
 
 .dropdown-btn {
