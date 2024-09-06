@@ -1,0 +1,17 @@
+<section>
+  <div class="card-header">
+    <img src="../../../assets/images/profile-image.svg" alt="profile image" class="profile-image">
+    <div class="user-info">
+      <p>{{projectInfo.author.name}}</p>
+      <p>09/24</p>
+    </div>
+    <h5>{{projectInfo.title}}</h5>
+    <div>
+      <span *ngFor="let category of projectInfo.categories">{{category.name}}</span>
+    </div>
+  </div>
+  <img [src]="projectInfo.imageUrl" alt="project image">
+  <p>{{projectInfo.description}}</p>
+  <p>Download</p>
+  <a [href]="projectInfo.link" target="_blank">{{projectInfo.link}}</a>
+</section>

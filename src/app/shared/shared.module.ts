@@ -8,6 +8,7 @@ import { ModalRegisterProjectComponent } from './modal-register-project/modal-re
 import { ModalSuccessMessageComponent } from './modal-success-message/modal-success-message.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PostedProjectModalComponent } from './posted-project-modal/posted-project-modal.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     ProjectCardComponent,
     ModalRegisterProjectComponent,
-    ModalSuccessMessageComponent
+    ModalSuccessMessageComponent,
+    PostedProjectModalComponent
   ],
   imports: [
     CommonModule,

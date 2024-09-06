@@ -8,7 +8,7 @@ import { AwsS3Service } from 'src/app/core/services/aws/aws-s3.service';
 import { ProjectService } from 'src/app/core/services/project/project.service';
 import { awsBucketUrl } from 'src/environments/environment.dev';
 import { ModalSuccessMessageComponent } from '../modal-success-message/modal-success-message.component';
-import { catchError, EMPTY, flatMap, map, mergeMap } from 'rxjs';
+import { catchError, EMPTY, mergeMap } from 'rxjs';
 import { AlertService } from '../services/alert.service';
 import { AlertTypes } from 'src/app/core/enums/alertType';
 import { IDropdownSettings, MultiSelectComponent } from 'ng-multiselect-dropdown';
@@ -16,6 +16,8 @@ import { ListItem } from 'ng-multiselect-dropdown/multiselect.model';
 import { CategoryService } from 'src/app/core/services/project/category.service';
 import { IProjectCategory } from 'src/app/core/interfaces/Iproject-category';
 import { Iproject } from 'src/app/core/interfaces/Iproject';
+import { PostedProjectModalComponent } from '../posted-project-modal/posted-project-modal.component';
+import { IpreviewProject } from 'src/app/core/interfaces/IpreviewProject';
 
 @Component({
   selector: 'app-modal-register-project',
@@ -55,12 +57,17 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
       ]
     ]
   });
-  public previewProjectInfo: IprojectRegister = {
+  public previewProjectInfo: IpreviewProject = {
     title: "",
     link: "",
     description: "",
     imageUrl: "",
-    userId: 0,
+    author: {
+      id: 0,
+      name: "",
+      lastName: "",
+      email: ""
+    },
     categories: []
   };
   private uploadSuccessful: Boolean = false;
@@ -89,6 +96,20 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
         link: this.projectInfo.link,
         description: this.projectInfo.description
       });
+
+      this.previewProjectInfo = {
+        title: this.projectInfo.title,
+        link: this.projectInfo.link,
+        description: this.projectInfo.description,
+        imageUrl: this.projectInfo.imageUrl,
+        author: {
+          id: this.projectInfo.author.id,
+          name: this.projectInfo.author.name,
+          lastName: this.projectInfo.author.lastName,
+          email: this.projectInfo.author.email
+        },
+        categories: this.projectInfo.categories
+      }
     }
 
     this.categoryService.getAll().pipe(
@@ -127,8 +148,9 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
   }
 
   public onIntemDeSelect(event: ListItem): void {
-    const index = this.registerProjectForm.get("tags")?.value.indexOf(event)
-    this.registerProjectForm.get("tags")?.value.pop(index)
+    const index = this.registerProjectForm.get("tags")?.value.indexOf(event);
+    this.registerProjectForm.get("tags")?.value.pop(index);
+    this.previewProjectInfo.categories = this.registerProjectForm.get("tags")?.value;
   }
 
   public onTitleChange(event: Event) {
@@ -252,5 +274,12 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
           this.bsModalService.show(ModalSuccessMessageComponent)
         }
       })
+  }
+
+  public previewProjectShow(): void {
+    const initialState = {
+      projectInfo: this.previewProjectInfo
+    }
+    this.bsModalService.show(PostedProjectModalComponent, { initialState })
   }
 }
