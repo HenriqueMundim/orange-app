@@ -8,13 +8,14 @@ import { AwsS3Service } from 'src/app/core/services/aws/aws-s3.service';
 import { ProjectService } from 'src/app/core/services/project/project.service';
 import { awsBucketUrl } from 'src/environments/environment.dev';
 import { ModalSuccessMessageComponent } from '../modal-success-message/modal-success-message.component';
-import { catchError, EMPTY, map } from 'rxjs';
+import { catchError, EMPTY, flatMap, map, mergeMap } from 'rxjs';
 import { AlertService } from '../services/alert.service';
 import { AlertTypes } from 'src/app/core/enums/alertType';
 import { IDropdownSettings, MultiSelectComponent } from 'ng-multiselect-dropdown';
 import { ListItem } from 'ng-multiselect-dropdown/multiselect.model';
 import { CategoryService } from 'src/app/core/services/project/category.service';
 import { IProjectCategory } from 'src/app/core/interfaces/Iproject-category';
+import { Iproject } from 'src/app/core/interfaces/Iproject';
 
 @Component({
   selector: 'app-modal-register-project',
@@ -24,7 +25,7 @@ import { IProjectCategory } from 'src/app/core/interfaces/Iproject-category';
 export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
 
   @Input() userInfo: IuserInfo | undefined;
-  @Input() projectInfo: IprojectRegister | undefined
+  @Input() projectInfo!: Iproject;
 
   private objectKey = "";
   public registerProjectForm: FormGroup = this.formBuilder.group({
@@ -63,7 +64,6 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
     categories: []
   };
   private uploadSuccessful: Boolean = false;
-  private preSignedUrl = "";
 
   @ViewChild('previewProject') previewProject: ElementRef<HTMLImageElement> | undefined;
   @ViewChild('categorySelect') categorySelect!: MultiSelectComponent;
@@ -134,16 +134,28 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
   public onTitleChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.previewProjectInfo.title = inputElement.value;
+
+    if(this.projectInfo) {
+      this.projectInfo.title = inputElement.value;
+    }
   }
 
   public onLinkChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.previewProjectInfo.link = inputElement.value;
+
+    if(this.projectInfo) {
+      this.projectInfo.link = inputElement.value;
+    }
   }
 
   public onDescriptionChange(event: Event) {
     const inputElement = event.target as HTMLTextAreaElement;
     this.previewProjectInfo.description = inputElement.value;
+
+    if(this.projectInfo) {
+      this.projectInfo.description = inputElement.value;
+    }
   }
 
   public onImagePicked(event: Event) {
@@ -163,7 +175,30 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
   }
 
   public editProject(): void {
-    console.log(this.registerProjectForm.get("image")?.value)
+    if(this.objectKey) {
+      const file: File = this.registerProjectForm.get("image")?.value;
+
+      this.awsS3Service.getPresignedUrl(file, this.objectKey, "upload")
+        .pipe(
+          catchError(() => EMPTY),
+          mergeMap((response) => this.awsS3Service.uploadFile(response.url, file)),
+          catchError(() => {
+            return EMPTY;
+          }),
+          mergeMap(() => {
+            this.projectInfo.imageUrl = awsBucketUrl + this.objectKey;
+            return this.projectService.editProject(this.projectInfo)
+          }),
+          catchError(() => EMPTY)
+        )
+        .subscribe({
+          next: project => {
+            console.log(project)
+            this.bsModalRef.hide();
+            location.reload();
+          }
+        })
+    }
   }
 
   private readFile(): void {
@@ -176,7 +211,6 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
     this.awsS3Service.getPresignedUrl(file, this.objectKey, "upload")
       .pipe(
         catchError(err => {
-          console.group("OK")
           this.alertService.showAlert("Não foi possível fazer o upload da imagem", AlertTypes.DANGER);
           this.uploadSuccessful = false;
           return EMPTY;

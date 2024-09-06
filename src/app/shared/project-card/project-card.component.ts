@@ -50,7 +50,7 @@ export class ProjectCardComponent implements OnInit {
       projectInfo: this.projectInfo
     }
 
-    this.bsModalService.show(ModalRegisterProjectComponent, { initialState: initialState })
+    this.bsModalService.show(ModalRegisterProjectComponent, { initialState })
   }
 
   public deleteProject(): void {

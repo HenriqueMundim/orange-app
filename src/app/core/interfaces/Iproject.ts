@@ -1,4 +1,6 @@
+import { UserInfo } from "os";
 import { IProjectCategory } from "./Iproject-category";
+import { IuserInfo } from "./IuserInfo.interface";
 
 export interface Iproject {
   id: number;
@@ -6,6 +8,6 @@ export interface Iproject {
 	link: string;
 	description: string;
 	imageUrl: string;
-	userId: Number;
+	author: IuserInfo;
   categories: Array<IProjectCategory>
 }

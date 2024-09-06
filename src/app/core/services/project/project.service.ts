@@ -13,11 +13,11 @@ export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
-  public registerProject(data: IprojectRegister): Observable<any> {
+  public registerProject(data: IprojectRegister): Observable<Iproject> {
     const headers = new HttpHeaders({
       'authRequired': 'true'
     })
-    return this.http.post(environment.url + "/projects", data, {
+    return this.http.post<Iproject>(environment.url + "/projects", data, {
       headers
     })
   }
@@ -36,6 +36,18 @@ export class ProjectService {
       {
         headers,
         params
+      },
+    )
+  }
+
+  public editProject(project: Iproject): Observable<Iproject> {
+    const headers = new HttpHeaders({
+      'authRequired': 'true'
+    })
+
+    return this.http.patch<Iproject>(`${environment.url}/projects`, project,
+      {
+        headers
       },
     )
   }
