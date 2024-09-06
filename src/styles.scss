@@ -72,6 +72,11 @@ h6 {
         padding: 0;
         max-width: 420px;
       }
+
+      &:has(app-posted-project-modal) {
+        margin: 134px auto;
+        max-width: 1042px;
+      }
     }
   }
 }

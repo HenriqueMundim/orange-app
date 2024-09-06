@@ -1,17 +1,22 @@
 <section>
+  <img src="../../../assets/icons/close.svg" alt="close icon" class="close-icon" (click)="closePreview()">
   <div class="card-header">
-    <img src="../../../assets/images/profile-image.svg" alt="profile image" class="profile-image">
-    <div class="user-info">
-      <p>{{projectInfo.author.name}}</p>
-      <p>09/24</p>
+    <div class="user">
+      <img src="../../../assets/images/profile-image.svg" alt="profile image" class="profile-image">
+      <div class="user-info">
+        <p>{{projectInfo.author.name}}</p>
+        <p>09/24</p>
+      </div>
     </div>
     <h5>{{projectInfo.title}}</h5>
-    <div>
+    <div class="categories-container">
       <span *ngFor="let category of projectInfo.categories">{{category.name}}</span>
     </div>
   </div>
-  <img [src]="projectInfo.imageUrl" alt="project image">
+  <img [src]="projectInfo.imageUrl" alt="project image" class="project-image">
   <p>{{projectInfo.description}}</p>
-  <p>Download</p>
-  <a [href]="projectInfo.link" target="_blank">{{projectInfo.link}}</a>
+  <div class="link-project">
+    <p>Download</p>
+    <a [href]="projectInfo.link" target="_blank">{{projectInfo.link}}</a>
+  </div>
 </section>

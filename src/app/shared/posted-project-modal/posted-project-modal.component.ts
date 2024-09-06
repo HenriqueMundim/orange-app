@@ -1,3 +1,4 @@
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Component, Input, OnInit } from '@angular/core';
 import { IpreviewProject } from 'src/app/core/interfaces/IpreviewProject';
 
@@ -10,9 +11,15 @@ export class PostedProjectModalComponent implements OnInit {
 
   @Input('projectInfo') projectInfo!: IpreviewProject
 
-  constructor() { }
+  constructor(
+    private bsModalRef: BsModalRef,
+    private bsModalService: BsModalService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  public closePreview(): void {
+    this.bsModalService.hide(this.bsModalRef.id);
+  }
 }
