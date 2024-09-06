@@ -26,7 +26,7 @@ import { IpreviewProject } from 'src/app/core/interfaces/IpreviewProject';
 })
 export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
 
-  @Input() userInfo: IuserInfo | undefined;
+  @Input() userInfo!: IuserInfo;
   @Input() projectInfo!: Iproject;
 
   private objectKey = "";
@@ -226,7 +226,10 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
   private readFile(): void {
     const reader = new FileReader();
     reader.readAsDataURL(this.registerProjectForm.controls["image"].value)
-    reader.onload = event => this.previewProject!.nativeElement.src = reader.result as string
+    reader.onload = event => {
+      this.previewProject!.nativeElement.src = reader.result as string
+      this.previewProjectInfo.imageUrl = this.previewProject!.nativeElement.src;
+    }
   }
 
   private getPresignedUrl(file: File, objectKey: string): void {
@@ -277,9 +280,22 @@ export class ModalRegisterProjectComponent implements OnInit, AfterViewInit {
   }
 
   public previewProjectShow(): void {
-    const initialState = {
-      projectInfo: this.previewProjectInfo
+    let initialState: { projectInfo: IpreviewProject };
+
+    if (this.projectInfo) {
+      initialState = {
+        projectInfo: this.previewProjectInfo
+      }
+      this.bsModalService.show(PostedProjectModalComponent, { initialState })
+    } else {
+      if (this.registerProjectForm.valid) {
+        this.previewProjectInfo.author = this.userInfo;
+        initialState = {
+          projectInfo: this.previewProjectInfo
+        }
+
+        this.bsModalService.show(PostedProjectModalComponent, { initialState })
+      }
     }
-    this.bsModalService.show(PostedProjectModalComponent, { initialState })
   }
 }
