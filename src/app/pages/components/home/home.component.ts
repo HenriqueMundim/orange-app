@@ -1,5 +1,5 @@
 import { CookieService } from 'ngx-cookie-service';
-import { catchError, EMPTY } from 'rxjs';
+import { catchError, EMPTY, mergeMap, Observable } from 'rxjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { IuserInfo } from 'src/app/core/interfaces/IuserInfo.interface';
@@ -9,6 +9,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ModalRegisterProjectComponent } from 'src/app/shared/modal-register-project/modal-register-project.component';
 import { ProjectService } from 'src/app/core/services/project/project.service';
 import { Iproject } from 'src/app/core/interfaces/Iproject';
+import { IPageResponse } from 'src/app/core/interfaces/IPageResponse';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +18,11 @@ import { Iproject } from 'src/app/core/interfaces/Iproject';
 })
 export class HomeComponent implements OnInit {
 
-  private token: string | null = "";
   private bsModalRef?: BsModalRef
   public projects: Array<Iproject> = []
+  public totalPages: number = 0;
+  public currentPage !: number;
+  public loading = true;
 
   public userInfo: IuserInfo = {
     id: 0,
@@ -49,28 +52,28 @@ export class HomeComponent implements OnInit {
       catchError(err => {
           this.router.navigate(["/login"])
           return EMPTY;
-      })
+      }),
+      mergeMap(respose => {
+        this.userInfo = respose;
+        return this.getUsersProjects()
+      }),
     )
     .subscribe({
-      next: respose => this.userInfo = respose,
-      complete: () => this.getUsersProjects()
+      next: respose => {
+          this.currentPage = respose.pageable.pageNumber;
+          this.totalPages = respose.totalPages;
+          this.projects = respose.content;
+      },
     })
   }
 
-  private getUsersProjects(): void {
-    this.projectService.getAllUserProjects(this.userInfo.id)
+  private getUsersProjects(): Observable<IPageResponse<Iproject>> {
+    return this.projectService.getAllUserProjects(this.userInfo.id)
       .pipe(
         catchError(error => {
           return EMPTY;
         })
       )
-      .subscribe({
-        next: respose => {
-          if (respose) {
-            this.projects = respose.content
-          }
-        },
-      })
   }
 
   public registerProject(): void {
@@ -80,4 +83,9 @@ export class HomeComponent implements OnInit {
     this.bsModalRef = this.modalService.show(ModalRegisterProjectComponent, {initialState});
   }
 
+  handleChangePage(data: any): void {
+    this.projects = data.projects
+    this.currentPage = data.currentPage
+    this.totalPages = data.totalPages
+  }
 }

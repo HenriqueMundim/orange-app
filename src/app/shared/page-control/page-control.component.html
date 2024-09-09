@@ -1,0 +1,13 @@
+<div class="pagination-controls">
+  <button class="prev-button" [ngClass]="{'hidden': currentPage == 0 }" (click)="previousPage()"></button>
+  <button
+          *ngFor="let page of numberPagesArray; let i = index"
+          class="page-button"
+          (click)="changePage(i)"
+          [ngClass]="{ 'current-page': currentPage == i, 'hidden': numberPagesArray.length > 5 && i > 4 }"
+          [id]="i"
+  >
+    {{ i + 1 }}
+  </button>
+  <button class="next-button" [ngClass]="{'hidden': currentPage == totalPages - 1 }" (click)="nextPage()"></button>
+</div>
