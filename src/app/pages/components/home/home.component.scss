@@ -61,14 +61,47 @@ main {
         flex: 0 0 calc(33.333% - 16px)
       }
     }
-  }
-}
 
-@media (max-width: 1280px) {
-  main {
-    .projects {
-      .projects-container {
+    .pagination-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 32px;
 
+      .current-page {
+        background-color: var(--color-neutral-70);
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .page-button {
+        width: 30px;
+        height: 30px;
+        border: var(--color-neutral-80);
+        border-radius: 8px;
+      }
+
+      .prev-button {
+        width: 16px;
+        height: 16px;
+        border: var(--color-neutral-80);
+        border-radius: 8px;
+        background: url('../../../../assets/icons/chevron-left-icon.svg') no-repeat center center;
+        background-size: contain;
+        cursor: pointer;
+      }
+
+      .next-button {
+        width: 16px;
+        height: 16px;
+        border: var(--color-neutral-80);
+        border-radius: 8px;
+        background: url('../../../../assets/icons/chevron-right-icon.svg') no-repeat center center;
+        background-size: contain;
+        cursor: pointer;
       }
     }
   }

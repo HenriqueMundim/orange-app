@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit {
   private token: string | null = "";
   private bsModalRef?: BsModalRef
   public projects: Array<Iproject> = []
+  public totalPages: number = 0;
+  public numberPagesArray = []
+  public currentPage !: number;
 
   public userInfo: IuserInfo = {
     id: 0,
@@ -67,7 +70,10 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: respose => {
           if (respose) {
-            this.projects = respose.content
+            this.currentPage = respose.pageable.pageNumber;
+            this.totalPages = respose.totalPages;
+            this.numberPagesArray = Array.from({length: respose.totalPages});
+            this.projects = respose.content;
           }
         },
       })
@@ -80,4 +86,35 @@ export class HomeComponent implements OnInit {
     this.bsModalRef = this.modalService.show(ModalRegisterProjectComponent, {initialState});
   }
 
+  public changePage(page: number): void {
+    this.projectService.getAllUserProjects(this.userInfo.id, page)
+      .subscribe({
+        next: response => {
+          this.projects = response.content;
+          this.currentPage = response.pageable.pageNumber;
+        }
+    })
+  }
+
+  public nextPage(): void {
+    if (this.currentPage !== this.totalPages) {
+      if (this.currentPage + 5 < this.totalPages) {
+        document.getElementById(`${this.currentPage}`)!.style.display="none";
+        document.getElementById(`${this.currentPage + 5}`)!.style.display="block";
+      }
+
+      this.changePage(this.currentPage + 1)
+    }
+  }
+
+  public previousPage(): void {
+    if (this.currentPage !== 0) {
+      if (this.totalPages - this.currentPage >= 5) {
+        document.getElementById(`${this.currentPage + 4}`)!.style.display="none";
+        document.getElementById(`${this.currentPage - 1}`)!.style.display="block";
+      }
+
+      this.changePage(this.currentPage - 1)
+    }
+  }
 }
