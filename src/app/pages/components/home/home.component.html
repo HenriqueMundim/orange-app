@@ -19,23 +19,16 @@
     </form>
     <section class="projects-container">
       <app-project-card class="without-project" *ngIf="projects.length === 0"></app-project-card>
-
       <ng-container *ngIf="projects.length > 0">
         <app-project-card *ngFor="let project of projects" [projectInfo]="project" [userInfo]="userInfo" class="without-project"></app-project-card>
       </ng-container>
     </section>
-    <div *ngIf="totalPages > 1" class="pagination-controls">
-      <button class="prev-button" [ngClass]="{'hidden': currentPage == 0 }" (click)="previousPage()"></button>
-      <button
-              *ngFor="let page of numberPagesArray; let i = index"
-              class="page-button"
-              (click)="changePage(i)"
-              [ngClass]="{ 'current-page': currentPage == i, 'hidden': numberPagesArray.length > 5 && i > 4 }"
-              [id]="i"
-      >
-        {{ i + 1 }}
-      </button>
-      <button class="next-button" [ngClass]="{'hidden': currentPage == totalPages - 1 }" (click)="nextPage()"></button>
-    </div>
+    <app-page-control *ngIf="totalPages > 1"
+      [userId]="userInfo.id"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (changePageInfo)="handleChangePage($event)"
+    ></app-page-control>
+>>>>>>> c9ae5272ef636e7b7a17a0a75e3160e993e006dc
   </section>
 </main>
