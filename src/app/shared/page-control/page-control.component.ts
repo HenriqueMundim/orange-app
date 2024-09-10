@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Ipage } from 'src/app/core/interfaces/Ipage';
 import { Iproject } from 'src/app/core/interfaces/Iproject';
 import { ProjectService } from 'src/app/core/services/project/project.service';
 
@@ -16,7 +17,7 @@ export class PageControlComponent implements OnInit {
   public numberPagesArray = [];
   public projects: Array<Iproject> = [];
 
-  @Output() changePageInfo: EventEmitter<{ projects: Array<Iproject>, currentPage: number, totalPages: number}> = new EventEmitter<{ projects: Array<Iproject>, currentPage: number, totalPages: number}>();
+  @Output() changePageInfo: EventEmitter<Ipage> = new EventEmitter<Ipage>();
 
   constructor(
     private projectService: ProjectService

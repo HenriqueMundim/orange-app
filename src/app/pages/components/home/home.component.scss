@@ -37,17 +37,6 @@ main {
   .projects {
     padding-inline: 32px;
 
-    form {
-      input {
-        width: 100%;
-        max-width: 512px;
-
-        padding: 16px 12px;
-        outline: none;
-        border: 1px solid var(--color-neutral-80);
-      }
-    }
-
     .projects-container {
       display: flex;
       padding: 40px 0;

@@ -10,6 +10,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PostedProjectModalComponent } from './posted-project-modal/posted-project-modal.component';
 import { PageControlComponent } from './page-control/page-control.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PageControlComponent } from './page-control/page-control.component';
     ModalRegisterProjectComponent,
     ModalSuccessMessageComponent,
     PostedProjectModalComponent,
-    PageControlComponent
+    PageControlComponent,
+    SearchBarComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { PageControlComponent } from './page-control/page-control.component';
     ProjectCardComponent,
     ModalRegisterProjectComponent,
     PageControlComponent,
+    SearchBarComponent,
     RouterModule
   ]
 })
