@@ -14,9 +14,10 @@
   </section>
   <section class="projects">
     <h6>Meus Projetos</h6>
-    <form [formGroup]="searchFilter">
-      <input type="text" formControlName="tag" placeholder="Buscar tags">
-    </form>
+    <app-search-bar
+      [userId]="userInfo.id"
+      (changePageInfo)="handleChangePage($event)"
+    ></app-search-bar>
     <section class="projects-container">
       <app-project-card class="without-project" *ngIf="projects.length === 0"></app-project-card>
       <ng-container *ngIf="projects.length > 0">
