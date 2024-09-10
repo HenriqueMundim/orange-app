@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, mergeMap } from 'rxjs';
+import { Ipage } from 'src/app/core/interfaces/Ipage';
 import { Iproject } from 'src/app/core/interfaces/Iproject';
 import { ProjectService } from 'src/app/core/services/project/project.service';
 
@@ -12,7 +13,7 @@ import { ProjectService } from 'src/app/core/services/project/project.service';
 export class SearchBarComponent implements OnInit {
 
   @Input() userId: number = 0;
-  @Output() changePageInfo: EventEmitter<{ projects: Array<Iproject>, currentPage: number, totalPages: number}> = new EventEmitter<{ projects: Array<Iproject>, currentPage: number, totalPages: number}>();
+  @Output() changePageInfo: EventEmitter<Ipage> = new EventEmitter<Ipage>();
 
   public searchFilter: FormGroup = this.formBuilder.group({
     tag: ['']
