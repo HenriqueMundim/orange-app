@@ -60,10 +60,16 @@ export class HomeComponent implements OnInit {
     )
     .subscribe({
       next: respose => {
-          this.currentPage = respose.pageable.pageNumber;
-          this.totalPages = respose.totalPages;
-          this.projects = respose.content;
+          if (respose) {
+            this.currentPage = respose.pageable.pageNumber;
+            this.totalPages = respose.totalPages;
+            this.projects = respose.content;
+          }
       },
+      error: () => {
+        this.router.navigate(["/login"]);
+        return EMPTY;
+      }
     })
   }
 
