@@ -1,8 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { error } from 'console';
 import { catchError, EMPTY } from 'rxjs';
 import { AlertTypes } from 'src/app/core/enums/alertType';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -80,6 +78,7 @@ export class LoginComponent implements OnInit {
           if(response && response.token) {
             this.alertService.showAlert("Login efetuado com sucesso!", AlertTypes.SUCCESS);
             localStorage.setItem("token", response.token);
+            setTimeout(() => this.router.navigate(['/home']), 3000)
           }
         }
       })

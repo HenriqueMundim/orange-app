@@ -1,0 +1,24 @@
+<section>
+  <img src="../../../assets/icons/close.svg" alt="close icon" class="close-icon" (click)="closePreview()">
+  <h5 *ngIf="viewSize <= 768" class="project-title">{{projectInfo.title}}</h5>
+  <img [src]="projectInfo.imageUrl" alt="project image" class="project-image" *ngIf="viewSize <= 768">
+  <div class="card-header">
+    <div class="user">
+      <img src="../../../assets/images/profile-image.svg" alt="profile image" class="profile-image">
+      <div class="user-info">
+        <p>{{projectInfo.author.name}}</p>
+        <p>09/24</p>
+      </div>
+    </div>
+    <h5 *ngIf="viewSize > 768" class="project-title">{{projectInfo.title}}</h5>
+    <div class="categories-container">
+      <span *ngFor="let category of projectInfo.categories">{{category.name}}</span>
+    </div>
+  </div>
+  <img [src]="projectInfo.imageUrl" alt="project image" class="project-image" *ngIf="viewSize > 768">
+  <p>{{projectInfo.description}}</p>
+  <div class="link-project">
+    <p>Download</p>
+    <a [href]="projectInfo.link" target="_blank">{{projectInfo.link}}</a>
+  </div>
+</section>

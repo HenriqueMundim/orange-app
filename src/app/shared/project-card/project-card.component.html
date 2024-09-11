@@ -1,0 +1,26 @@
+<div class="card" *ngIf="projectInfo == undefined">
+  <img src="../../../assets/icons/collections.png" alt="default image icon" class="default-image">
+  <p>Adicione seu primeiro projeto</p>
+  <p>Compartilhe seu talento com milhares de pessoas</p>
+</div>
+<div class="card-with-project" *ngIf="projectInfo != undefined">
+  <div class="image-container">
+    <img src="../../../assets/icons/icon_edit.svg" alt="edit icon" class="edit-button" (click)="showEditProjectMenu()" #openMenuEdit>
+    <nav class="dropdown-menu-project" #dropdownMenuProject>
+      <ul>
+        <li (click)="openEditModal()">Editar</li>
+        <li (click)="deleteProject()">Deletar</li>
+      </ul>
+    </nav>
+    <img [src]="projectInfo.imageUrl" alt="project image" style="width: 100%;" class="project-image">
+  </div>
+  <div class="info-container">
+    <div class="info">
+      <img src="../../../assets/images/profile-image.svg" alt="user profile image" class="user-image" *ngIf="null === null">
+      <p>{{" • " + userInfo.name + " " + userInfo.lastName + " • " + "09/24"}}</p>
+    </div>
+    <div class="category-container">
+      <p *ngFor="let category of projectInfo.categories">{{category.name}}</p>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,7 @@
 
     --color-secondary-100: #FF5522;
 
+    --color-neutral-60: #FCFDFF;
     --color-neutral-70: #E6E9F2;
     --color-neutral-80: #C2C4CC;
     --color-neutral-100: #818388;
@@ -51,8 +52,67 @@ h5 {
 h6 {
     font-size: 1.25rem !important;
 }
+
+.modal-open {
+  .modal {
+    .modal-dialog {
+      max-width: 900px;
+      margin-top: 150px;
+      padding: 0 24px;
+
+      &:has(app-modal-register-project) {
+        padding: 0;
+      }
+
+      &:has(app-modal-success-message) {
+        margin: 190px auto;
+        padding: 0;
+        max-width: 350px
+      }
+
+      &:has(app-delete-project-modal) {
+        margin: 295px auto;
+        padding: 0;
+        max-width: 420px;
+      }
+
+      &:has(app-posted-project-modal) {
+        margin: 134px auto;
+        max-width: 1042px;
+        padding: 0;
+      }
+    }
+  }
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
+}
+
+.dropdown-btn {
+  border: none !important;
+  padding: 0 !important;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  color: var(--color-neutral-100);
+}
+
+.dropdown-multiselect__caret {
+  display: none !important;
+}
+
+.selected-item {
+  background-color: var(--color-neutral-100) !important;
+}
+
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+
