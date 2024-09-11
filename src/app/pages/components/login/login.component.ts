@@ -78,6 +78,7 @@ export class LoginComponent implements OnInit {
           if(response && response.token) {
             this.alertService.showAlert("Login efetuado com sucesso!", AlertTypes.SUCCESS);
             localStorage.setItem("token", response.token);
+            setTimeout(() => this.router.navigate(['/home']), 3000)
           }
         }
       })

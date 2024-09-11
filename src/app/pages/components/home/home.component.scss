@@ -1,0 +1,84 @@
+main {
+
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 100px;
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+
+      .profile-image {
+        width: 122px;
+        height: 122px;
+        border-radius: 300px;
+      }
+
+      .profile-card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        button {
+          padding: 8px 22px;
+          border: none;
+          border-radius: 8px;
+
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .projects {
+    padding-inline: 32px;
+
+    .projects-container {
+      display: flex;
+      padding: 40px 0;
+      flex-wrap: wrap;
+      gap: 24px;
+
+      .without-project, .with-project {
+        width: 100%;
+        max-width: 390px;
+        border-radius: 8px;
+        flex: 0 0 calc(33.333% - 16px)
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+
+    .profile {
+      padding: 70px 30px;
+
+      .profile-card {
+        flex-direction: column;
+        gap: 0px;
+
+        .profile-card-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0px;
+        }
+      }
+    }
+
+    .projects {
+      padding-inline: 16px;
+
+      .projects-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+}

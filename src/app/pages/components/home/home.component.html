@@ -1,0 +1,34 @@
+<app-header [name]="userInfo.name + ' ' + userInfo.lastName" [email]="userInfo.email"></app-header>
+<main>
+  <section class="profile">
+    <div class="profile-card">
+      <img src="../../../../assets/images/profile-image.svg" class="profile-image" alt="profile image">
+      <div class="profile-card-info">
+        <div class="user-info">
+          <h5>{{userInfo.name + ' ' + userInfo.lastName}}</h5>
+          <small>Brasil</small>
+        </div>
+        <button (click)="registerProject()">Adicionar projeto</button>
+      </div>
+    </div>
+  </section>
+  <section class="projects">
+    <h6>Meus Projetos</h6>
+    <app-search-bar
+      [userId]="userInfo.id"
+      (changePageInfo)="handleChangePage($event)"
+    ></app-search-bar>
+    <section class="projects-container">
+      <app-project-card class="without-project" *ngIf="projects.length === 0"></app-project-card>
+      <ng-container *ngIf="projects.length > 0">
+        <app-project-card *ngFor="let project of projects" [projectInfo]="project" [userInfo]="userInfo" class="without-project"></app-project-card>
+      </ng-container>
+    </section>
+    <app-page-control *ngIf="totalPages > 1"
+      [userId]="userInfo.id"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (changePageInfo)="handleChangePage($event)"
+    ></app-page-control>
+  </section>
+</main>

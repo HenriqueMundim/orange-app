@@ -3,12 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+
 import { CookieService } from 'ngx-cookie-service';
+import { PagesModule } from './pages/pages.module';
+import { AuthInterceptor } from './core/http/auth-interceptor.interceptor';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -20,10 +24,17 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
-    SharedModule
+    SharedModule,
+    PagesModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
-    CookieService
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })
