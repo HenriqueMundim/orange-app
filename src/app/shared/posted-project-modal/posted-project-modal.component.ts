@@ -31,6 +31,8 @@ export class PostedProjectModalComponent implements OnInit {
 
   public closePreview(): void {
     this.bsModalService.hide(this.bsModalRef.id);
-    this.modalId.setClass("show")
+    if (this.modalId) {
+      this.modalId.setClass("show")
+    }
   }
 }

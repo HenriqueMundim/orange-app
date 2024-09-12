@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { DeleteProjectModalComponent } from './components/delete-project-modal/delete-project-modal.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DeleteProjectModalComponent } from './components/delete-project-modal/d
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    DeleteProjectModalComponent
+    DeleteProjectModalComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

@@ -7,13 +7,13 @@
       <div [ngClass]="viewSize <= 768 ? 'menu-dropdown-container' : 'menu-dropdown-container-desktop'" #dropdownMenu>
         <nav class="menu-dropdown">
           <ul class="menu-dropdown-list">
-            <li>
+            <li class="user-info">
               <p>{{name}}</p>
               <p class="light-color">{{email}}</p>
             </li>
             <hr>
             <li routerLink="/home" [ngClass]="{'active-menu': path == '/home'}"><p>Meus Projetos</p></li>
-            <li routerLink="/projects" [ngClass]="{'active-menu': path == '/projects'}"><p>Descobrir</p></li>
+            <li routerLink="/dashboard" [ngClass]="{'active-menu': path == '/dashboard'}"><p>Descobrir</p></li>
             <hr>
             <li (click)="logout()">
               <img class="logout-icon" src="../../../assets/icons/logout-icon.svg" alt="Logout icon">
@@ -27,7 +27,7 @@
     <nav *ngIf="viewSize > 768">
       <ul>
         <li><a routerLink="/home" routerLinkActive="active">Meus Projetos</a></li>
-        <li><a routerLink="/projects" routerLinkActive="active">Descobrir</a>r</li>
+        <li><a routerLink="/dashboard" routerLinkActive="active">Descobrir</a></li>
       </ul>
     </nav>
   </div>

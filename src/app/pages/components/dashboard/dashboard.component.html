@@ -1,0 +1,12 @@
+<app-header [name]="userInfo.name + ' ' + userInfo.lastName" [email]="userInfo.email"></app-header>
+<main>
+  <section class="hero">
+    <h4>Junte-se à comunidade de inovação, inspiração e descobertas, transformando experiências em conexões inesquecíveis</h4>
+  </section>
+  <section class="projects-section">
+    <app-search-bar></app-search-bar>
+    <div class="projects">
+      <app-project-card *ngFor="let project of projects" [projectInfo]="project" class="with-project"></app-project-card>
+    </div>
+  </section>
+</main>
