@@ -15,13 +15,14 @@
   <section class="projects">
     <h6>Meus Projetos</h6>
     <app-search-bar
+      *ngIf="userInfo.id"
       [userId]="userInfo.id"
       (changePageInfo)="handleChangePage($event)"
     ></app-search-bar>
     <section class="projects-container">
       <app-project-card class="without-project" *ngIf="projects.length === 0"></app-project-card>
       <ng-container *ngIf="projects.length > 0">
-        <app-project-card *ngFor="let project of projects" [projectInfo]="project" [userInfo]="userInfo" class="without-project"></app-project-card>
+        <app-project-card *ngFor="let project of projects" [projectInfo]="project" [userInfo]="userInfo" class="with-project"></app-project-card>
       </ng-container>
     </section>
     <app-page-control *ngIf="totalPages > 1"

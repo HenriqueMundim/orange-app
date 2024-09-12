@@ -28,19 +28,35 @@ export class PageControlComponent implements OnInit {
   }
 
   public changePage(page: number): void {
-    this.projectService.getAllUserProjects(this.userId, page)
+    if (this.userId) {
+      this.projectService.getAllUserProjects(this.userId, page)
       .subscribe({
         next: response => {
           this.projects = response.content;
           this.currentPage = response.pageable.pageNumber;
-          this.totalPages
+          this.totalPages = response.totalPages
           this.changePageInfo.emit({
             projects: this.projects,
             currentPage: this.currentPage,
             totalPages: this.totalPages
           })
         }
-    })
+      })
+    } else {
+      this.projectService.getAllProjects(page)
+      .subscribe({
+        next: response => {
+          this.projects = response.content;
+          this.currentPage = response.pageable.pageNumber;
+          this.totalPages = response.totalPages;
+          this.changePageInfo.emit({
+            projects: this.projects,
+            currentPage: this.currentPage,
+            totalPages: this.totalPages
+          })
+        }
+      })
+    }
   }
 
   public nextPage(): void {

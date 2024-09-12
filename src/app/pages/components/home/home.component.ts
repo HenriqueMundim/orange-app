@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit {
     }
     this.bsModalRef = this.modalService.show(ModalRegisterProjectComponent, {initialState});
   }
+
   handleChangePage(data: any): void {
     this.projects = data.projects
     this.currentPage = data.currentPage

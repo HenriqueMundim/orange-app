@@ -1,0 +1,42 @@
+main {
+  .hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 0;
+
+    h4 {
+      text-align: center;
+      max-width: 744px;
+    }
+  }
+
+  .projects-section {
+    padding-inline: 32px;
+
+    .projects {
+      display: flex;
+      padding: 40px 0;
+      flex-wrap: wrap;
+      gap: 24px;
+
+      .with-project {
+        width: 100%;
+        max-width: 390px;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    .projects-section {
+      .projects {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@
   <p>Compartilhe seu talento com milhares de pessoas</p>
 </div>
 <div class="card-with-project" *ngIf="projectInfo != undefined">
-  <div class="image-container">
+  <div class="image-container" *ngIf="userInfo">
     <img src="../../../assets/icons/icon_edit.svg" alt="edit icon" class="edit-button" (click)="showEditProjectMenu()" #openMenuEdit>
     <nav class="dropdown-menu-project" #dropdownMenuProject>
       <ul>
@@ -14,12 +14,16 @@
     </nav>
     <img [src]="projectInfo.imageUrl" alt="project image" style="width: 100%;" class="project-image">
   </div>
+  <div class="image-container" *ngIf="!userInfo">
+    <img [src]="projectInfo.imageUrl" alt="project image" style="width: 100%;" class="project-image" (click)="viewProject()">
+  </div>
   <div class="info-container">
     <div class="info">
       <img src="../../../assets/images/profile-image.svg" alt="user profile image" class="user-image" *ngIf="null === null">
-      <p>{{" • " + userInfo.name + " " + userInfo.lastName + " • " + "09/24"}}</p>
+      <p *ngIf="userInfo">{{" • " + userInfo.name + " " + userInfo.lastName + " • " + "09/24"}}</p>
+      <p *ngIf="!userInfo">{{" • " + projectInfo.author.name + " " + projectInfo.author.lastName + " • " + "09/24"}}</p>
     </div>
-    <div class="category-container">
+    <div class="category-container" *ngIf="userInfo">
       <p *ngFor="let category of projectInfo.categories">{{category.name}}</p>
     </div>
   </div>
