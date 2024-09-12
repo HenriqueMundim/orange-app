@@ -15,6 +15,7 @@
   <section class="projects">
     <h6>Meus Projetos</h6>
     <app-search-bar
+      *ngIf="userInfo.id"
       [userId]="userInfo.id"
       (changePageInfo)="handleChangePage($event)"
     ></app-search-bar>

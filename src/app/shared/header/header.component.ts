@@ -12,8 +12,8 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild("dropdownMenu") dropdownMenu: ElementRef<HTMLElement> | undefined
   @ViewChild("openMenu") openMenu: ElementRef<HTMLElement> | undefined
-  @Input() name!: string;
-  @Input() email!: string;
+  @Input() name: string = "";
+  @Input() email: string = "";
 
   private clickListener: () => void;
   private isMenuOpen = false;

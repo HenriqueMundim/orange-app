@@ -12,12 +12,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  public userInfo: IuserInfo = {
-    id: 0,
-    name: "",
-    lastName: "",
-    email: ""
-  }
+  public userInfo!: IuserInfo
   public projects: Array<Iproject> = []
   public totalPages: number = 0;
   public currentPage !: number;
@@ -54,4 +49,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  handleChangePage(data: any): void {
+    this.projects = data.projects
+    this.currentPage = data.currentPage
+    this.totalPages = data.totalPages
+  }
 }

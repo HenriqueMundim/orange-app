@@ -61,7 +61,24 @@ export class ProjectService {
     })
 
     const params = new HttpParams()
-      .set('id', id)
+      .set('category', category)
+      .set('page', page)
+      .set('size', size)
+
+    return this.http.get<IPageResponse<Iproject>>(`${environment.url}/projects/search/${id}`,
+      {
+        headers,
+        params
+      },
+    )
+  }
+
+  public getAllProjectsByCategory(category: string, page: number = 0, size: number = 10): Observable<IPageResponse<Iproject>> {
+    const headers = new HttpHeaders({
+      'authRequired': 'true'
+    })
+
+    const params = new HttpParams()
       .set('category', category)
       .set('page', page)
       .set('size', size)
