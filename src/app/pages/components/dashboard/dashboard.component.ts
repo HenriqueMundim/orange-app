@@ -12,7 +12,12 @@ import { UserService } from 'src/app/core/services/user/user.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  public userInfo!: IuserInfo
+  public userInfo: IuserInfo = {
+    id: 0,
+    name: "",
+    lastName: "",
+    email: ""
+  };
   public projects: Array<Iproject> = []
   public totalPages: number = 0;
   public currentPage !: number;

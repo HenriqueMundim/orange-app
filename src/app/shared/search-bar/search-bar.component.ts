@@ -36,11 +36,13 @@ export class SearchBarComponent implements OnInit {
       )
       .subscribe({
         next: response => {
-          this.changePageInfo.emit({
-            projects: response.content,
-            currentPage: response.pageable.pageNumber,
-            totalPages: response.totalPages
-          })
+          if(response) {
+            this.changePageInfo.emit({
+              projects: response.content,
+              currentPage: response.pageable.pageNumber,
+              totalPages: response.totalPages
+            })
+          }
         }
       })
     } else {
@@ -55,11 +57,13 @@ export class SearchBarComponent implements OnInit {
       )
       .subscribe({
         next: response => {
-          this.changePageInfo.emit({
-            projects: response.content,
-            currentPage: response.pageable.pageNumber,
-            totalPages: response.totalPages
-          })
+          if(response) {
+            this.changePageInfo.emit({
+              projects: response.content,
+              currentPage: response.pageable.pageNumber,
+              totalPages: response.totalPages
+            })
+          }
         }
       })
     }

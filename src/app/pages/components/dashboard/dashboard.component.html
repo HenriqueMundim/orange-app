@@ -7,7 +7,7 @@
     <app-search-bar
       (changePageInfo)="handleChangePage($event)"
     ></app-search-bar>
-    <div class="projects">
+    <div class="projects" *ngIf="projects">
       <app-project-card *ngFor="let project of projects" [projectInfo]="project" class="with-project"></app-project-card>
     </div>
   </section>
