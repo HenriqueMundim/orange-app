@@ -40,17 +40,19 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private modalService: BsModalService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
+    console.log(this.cookieService.get("token"))
     this.getUserInfo();
   }
 
   private getUserInfo() {
     this.userService.getInfo().pipe(
       catchError(err => {
-          this.router.navigate(["/login"])
+          // this.router.navigate(["/login"])
           return EMPTY;
       }),
       mergeMap(respose => {

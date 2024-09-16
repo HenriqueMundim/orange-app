@@ -21,7 +21,8 @@ export class UserService {
       'authRequired': 'true'
     })
     return this.http.get<IuserInfo>(`${environment.url}/users`, {
-      headers
+      headers,
+      withCredentials: true
     })
   }
 }

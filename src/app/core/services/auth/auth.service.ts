@@ -22,7 +22,8 @@ export class AuthService {
     return this.http.post<IloginResponse>(environment.url + "/login",
       data,
       {
-        headers
+        headers,
+        withCredentials: true
       }
     )
   }

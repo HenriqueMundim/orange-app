@@ -21,6 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
       } else if(this.cookieService.get("token")) {
         token = this.cookieService.get("token");
       }
+
       const clone = request.clone({
         headers: request.headers.set('Authorization', `Bearer ${token}`)
       })
@@ -33,6 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
   private shouldIntercept(request: HttpRequest<unknown>): boolean {
+    console.log(!!request.headers.get("authRequired"))
     return !!request.headers.get("authRequired");
   }
 }
